@@ -8,7 +8,7 @@ public class Usuario {
 
     private int id;
     private String nombreUsuario;
-    private String contraseña;
+    private String contrasenia;
 
     public int getId() {
         return id;
@@ -23,11 +23,11 @@ public class Usuario {
     }
 
     public String getContraseña() {
-        return contraseña;
+        return contrasenia;
     }
 
     public void setContraseña(String contraseña) {
-        this.contraseña = contraseña;
+        this.contrasenia = contraseña;
     }
 
 }
