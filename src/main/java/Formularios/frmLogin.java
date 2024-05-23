@@ -1,6 +1,7 @@
 package Formularios;
 
 import java.awt.Color;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -10,11 +11,11 @@ public class frmLogin extends javax.swing.JFrame {
 
     //variables para el cursor
     int xMouse, yMouse;
-    
+
     public frmLogin() {
         initComponents();
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -58,6 +59,16 @@ public class frmLogin extends javax.swing.JFrame {
         txtUsuario.setForeground(new java.awt.Color(153, 153, 153));
         txtUsuario.setText("Ingrese su nombre de usuario");
         txtUsuario.setBorder(null);
+        txtUsuario.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                txtUsuarioMousePressed(evt);
+            }
+        });
+        txtUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtUsuarioActionPerformed(evt);
+            }
+        });
 
         jLabel5.setFont(new java.awt.Font("Candara", 1, 15)); // NOI18N
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -66,6 +77,11 @@ public class frmLogin extends javax.swing.JFrame {
         txtContraseña.setForeground(new java.awt.Color(153, 153, 153));
         txtContraseña.setText("**********");
         txtContraseña.setBorder(null);
+        txtContraseña.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                txtContraseñaMousePressed(evt);
+            }
+        });
 
         loginBtn.setBackground(new java.awt.Color(1, 101, 150));
 
@@ -75,6 +91,9 @@ public class frmLogin extends javax.swing.JFrame {
         loginBtnTxt.setText("ENTRAR");
         loginBtnTxt.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         loginBtnTxt.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                loginBtnTxtMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 loginBtnTxtMouseEntered(evt);
             }
@@ -249,6 +268,37 @@ public class frmLogin extends javax.swing.JFrame {
     private void loginBtnTxtMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loginBtnTxtMouseExited
         loginBtn.setBackground(new Color(1, 101, 150));
     }//GEN-LAST:event_loginBtnTxtMouseExited
+
+    private void txtUsuarioMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtUsuarioMousePressed
+        if (txtUsuario.getText().equalsIgnoreCase("Ingrese su nombre de usuario")) {
+            txtUsuario.setText("");
+            txtUsuario.setForeground(Color.BLACK);
+        }
+        if (String.valueOf(txtContraseña.getPassword()).isEmpty()) {
+            txtContraseña.setText("**********");
+            txtContraseña.setForeground(Color.GRAY);
+        }
+    }//GEN-LAST:event_txtUsuarioMousePressed
+
+    private void txtContraseñaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtContraseñaMousePressed
+        if (String.valueOf(txtContraseña.getPassword()).equals("**********")) {
+            txtContraseña.setText("");
+            txtContraseña.setForeground(Color.BLACK);
+        }
+        if (txtUsuario.getText().isEmpty()) {
+            txtUsuario.setText("Ingrese su nombre de usuario");
+            txtUsuario.setForeground(Color.GRAY);
+        }
+    }//GEN-LAST:event_txtContraseñaMousePressed
+
+    private void loginBtnTxtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loginBtnTxtMouseClicked
+        JOptionPane.showMessageDialog(rootPane, "Intento de login con los datos de:\nUsuario: " + txtUsuario.getText()
+                + "\nContraseña: " + String.valueOf(txtContraseña.getPassword()), "ATENCIÓN", 3);
+    }//GEN-LAST:event_loginBtnTxtMouseClicked
+
+    private void txtUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsuarioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtUsuarioActionPerformed
 
     /**
      * @param args the command line arguments
