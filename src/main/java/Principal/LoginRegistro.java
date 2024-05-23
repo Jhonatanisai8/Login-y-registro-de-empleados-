@@ -1,13 +1,13 @@
 package Principal;
 
-import Formularios.frmLogin;
+import Formularios.frmInicio;
 /**
  *
  * @author Jhonatan
  */
 public class LoginRegistro {
     public static void main(String[] args) {
-        frmLogin o = new frmLogin();
+        frmInicio o = new frmInicio();
         o.setVisible(true);
     }
 }

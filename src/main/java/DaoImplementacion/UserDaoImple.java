@@ -24,7 +24,7 @@ public class UserDaoImple implements UsuarioDao {
             PreparedStatement insertar = conectar.prepareStatement(sql);
             insertar.setInt(1, 0);
             insertar.setString(2, usuario.getNombreUsuario());
-            insertar.setString(3, usuario.getContraseña());
+            insertar.setString(3, usuario.getcontrasenia());
             insertar.executeUpdate();
             conexion.desconectaBD();
         } catch (SQLException e) {

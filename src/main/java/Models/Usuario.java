@@ -22,11 +22,11 @@ public class Usuario {
         this.nombreUsuario = nombreUsuario;
     }
 
-    public String getContraseña() {
+    public String getcontrasenia() {
         return contrasenia;
     }
 
-    public void setContraseña(String contraseña) {
+    public void setcontrasenia(String contraseña) {
         this.contrasenia = contraseña;
     }
 

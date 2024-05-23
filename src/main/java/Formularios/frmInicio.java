@@ -1,21 +1,51 @@
 package Formularios;
 
+import DaoImplementacion.UserDaoImple;
+import Models.Usuario;
+import Models.Utelerias;
 import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatMaterialPalenightIJTheme;
 import java.awt.Color;
+import java.awt.HeadlessException;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author JHONATAN
  */
-public class frmLogin extends javax.swing.JFrame {
+public class frmInicio extends javax.swing.JFrame {
 
     //variables para el cursor
     int xMouse, yMouse;
 
-    public frmLogin() {
+    Usuario usuario;
+    UserDaoImple userDaoImple;
+
+    public frmInicio() {
         initComponents();
         FlatMaterialPalenightIJTheme.setup();
+    }
+
+    void iniciarSesion() {
+        try {
+            String campo = Utelerias.validarCampos(txtUsuario, txtContrasenia);
+            if (campo.equals("")) {
+                String user, password;
+                user = txtUsuario.getText();
+                password = String.valueOf(txtContrasenia.getText());
+                userDaoImple = new UserDaoImple();
+                if (userDaoImple.iniciarSesion(user, password) == true) {
+                    frmHola p = new frmHola();
+                    p.setVisible(true);
+                    dispose();
+                } else {
+                    JOptionPane.showMessageDialog(rootPane, "Usuario con nombre: " + user + ", no encontrado", "ATENCIÓN", 3);
+                }
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "VERIQUE LOS CAMPOS EN: " + campo, "ATENCIÓN", 3);
+            }
+        } catch (HeadlessException e) {
+            JOptionPane.showMessageDialog(rootPane, "ERROR: " + e.toString(), "ATENCIÓN", 3);
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -30,7 +60,7 @@ public class frmLogin extends javax.swing.JFrame {
         txtUsuario = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel5 = new javax.swing.JLabel();
-        txtContraseña = new javax.swing.JPasswordField();
+        txtContrasenia = new javax.swing.JPasswordField();
         jSeparator2 = new javax.swing.JSeparator();
         loginBtn = new javax.swing.JPanel();
         loginBtnTxt = new javax.swing.JLabel();
@@ -76,12 +106,12 @@ public class frmLogin extends javax.swing.JFrame {
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setText("CONTRASEÑA");
 
-        txtContraseña.setForeground(new java.awt.Color(153, 153, 153));
-        txtContraseña.setText("**********");
-        txtContraseña.setBorder(null);
-        txtContraseña.addMouseListener(new java.awt.event.MouseAdapter() {
+        txtContrasenia.setForeground(new java.awt.Color(153, 153, 153));
+        txtContrasenia.setText("**********");
+        txtContrasenia.setBorder(null);
+        txtContrasenia.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                txtContraseñaMousePressed(evt);
+                txtContraseniaMousePressed(evt);
             }
         });
 
@@ -190,7 +220,7 @@ public class frmLogin extends javax.swing.JFrame {
                                     .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txtUsuario, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 332, Short.MAX_VALUE)
                                     .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtContraseña, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtContrasenia, javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(0, 0, Short.MAX_VALUE))))
@@ -216,7 +246,7 @@ public class frmLogin extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtContrasenia, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(52, 52, 52)
@@ -276,26 +306,27 @@ public class frmLogin extends javax.swing.JFrame {
             txtUsuario.setText("");
             txtUsuario.setForeground(Color.BLACK);
         }
-        if (String.valueOf(txtContraseña.getPassword()).isEmpty()) {
-            txtContraseña.setText("**********");
-            txtContraseña.setForeground(Color.GRAY);
+        if (String.valueOf(txtContrasenia.getPassword()).isEmpty()) {
+            txtContrasenia.setText("**********");
+            txtContrasenia.setForeground(Color.GRAY);
         }
     }//GEN-LAST:event_txtUsuarioMousePressed
 
-    private void txtContraseñaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtContraseñaMousePressed
-        if (String.valueOf(txtContraseña.getPassword()).equals("**********")) {
-            txtContraseña.setText("");
-            txtContraseña.setForeground(Color.BLACK);
+    private void txtContraseniaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtContraseniaMousePressed
+        if (String.valueOf(txtContrasenia.getPassword()).equals("**********")) {
+            txtContrasenia.setText("");
+            txtContrasenia.setForeground(Color.BLACK);
         }
         if (txtUsuario.getText().isEmpty()) {
             txtUsuario.setText("Ingrese su nombre de usuario");
             txtUsuario.setForeground(Color.GRAY);
         }
-    }//GEN-LAST:event_txtContraseñaMousePressed
+    }//GEN-LAST:event_txtContraseniaMousePressed
 
     private void loginBtnTxtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loginBtnTxtMouseClicked
-        JOptionPane.showMessageDialog(rootPane, "Intento de login con los datos de:\nUsuario: " + txtUsuario.getText()
-                + "\nContraseña: " + String.valueOf(txtContraseña.getPassword()), "ATENCIÓN", 3);
+//        JOptionPane.showMessageDialog(rootPane, "Intento de login con los datos de:\nUsuario: " + txtUsuario.getText()
+//                + "\nContraseña: " + String.valueOf(txtContrasenia.getPassword()), "ATENCIÓN", 3);
+        iniciarSesion();
     }//GEN-LAST:event_loginBtnTxtMouseClicked
 
     private void txtUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsuarioActionPerformed
@@ -319,20 +350,21 @@ public class frmLogin extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(frmLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmInicio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(frmLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmInicio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(frmLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmInicio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(frmLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmInicio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new frmLogin().setVisible(true);
+                new frmInicio().setVisible(true);
             }
         });
     }
@@ -351,7 +383,7 @@ public class frmLogin extends javax.swing.JFrame {
     private javax.swing.JLabel lblExit;
     private javax.swing.JPanel loginBtn;
     private javax.swing.JLabel loginBtnTxt;
-    private javax.swing.JPasswordField txtContraseña;
+    private javax.swing.JPasswordField txtContrasenia;
     private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables
 }

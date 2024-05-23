@@ -64,7 +64,7 @@
                                       <Component id="jLabel4" alignment="0" min="-2" pref="99" max="-2" attributes="0"/>
                                       <Component id="txtUsuario" alignment="0" pref="332" max="32767" attributes="0"/>
                                       <Component id="jSeparator1" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="txtContraseña" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="txtContrasenia" alignment="0" max="32767" attributes="0"/>
                                       <Component id="jSeparator2" alignment="0" max="32767" attributes="0"/>
                                       <Component id="jLabel5" alignment="0" min="-2" pref="118" max="-2" attributes="0"/>
                                   </Group>
@@ -99,7 +99,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jLabel5" min="-2" pref="30" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="txtContraseña" min="-2" pref="37" max="-2" attributes="0"/>
+                  <Component id="txtContrasenia" min="-2" pref="37" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jSeparator2" min="-2" pref="10" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
@@ -169,7 +169,7 @@
             <Property name="text" type="java.lang.String" value="CONTRASE&#xd1;A"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JPasswordField" name="txtContrase&#xf1;a">
+        <Component class="javax.swing.JPasswordField" name="txtContrasenia">
           <Properties>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="99" green="99" red="99" type="rgb"/>
@@ -180,7 +180,7 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="txtContrase&#xf1;aMousePressed"/>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="txtContraseniaMousePressed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JSeparator" name="jSeparator2">
