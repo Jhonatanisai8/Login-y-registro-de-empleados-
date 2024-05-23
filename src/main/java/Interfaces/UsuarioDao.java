@@ -12,5 +12,5 @@ public interface UsuarioDao {
 
     public boolean comprobarUsuriosRepetidos(Usuario usuario);
 
-    public boolean iniciarSesion(Usuario usuario);
+    public boolean iniciarSesion(String user, String pass);
 }
