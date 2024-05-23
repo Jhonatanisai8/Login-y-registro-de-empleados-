@@ -1,4 +1,4 @@
-package Vistas;
+package Principal;
 
 import Formularios.frmLogin;
 /**
