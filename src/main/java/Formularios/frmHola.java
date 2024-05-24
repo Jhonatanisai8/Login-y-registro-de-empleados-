@@ -1,5 +1,6 @@
 package Formularios;
 
+import Vistas.Bienvenida;
 import Vistas.RegistroUsuario;
 import Vistas.ReporteUsuarios;
 import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatMaterialLighterIJTheme;
@@ -20,6 +21,7 @@ public class frmHola extends javax.swing.JFrame {
         initComponents();
         obtenerFecha();
         FlatMaterialLighterIJTheme.setup();
+        frmHola.colocalarPanelEnPrincipal(new Bienvenida());
     }
 
     private void obtenerFecha() {
@@ -263,7 +265,7 @@ public class frmHola extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnPrincipalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPrincipalMouseClicked
-        // TODO add your handling code here:
+        frmHola.colocalarPanelEnPrincipal(new Bienvenida());
     }//GEN-LAST:event_btnPrincipalMouseClicked
 
     private void btnPrincipalMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPrincipalMouseEntered
