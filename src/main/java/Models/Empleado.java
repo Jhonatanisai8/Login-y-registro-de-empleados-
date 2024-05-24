@@ -50,5 +50,76 @@ public class Empleado {
         this.estadoCivil = estadoCivil;
         this.numHijos = numHijos;
     }
+    
+    //getters y setters
+
+    public int getId() {
+        return id;
+    }
+    
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getAppPaterno() {
+        return appPaterno;
+    }
+
+    public void setAppPaterno(String appPaterno) {
+        this.appPaterno = appPaterno;
+    }
+
+    public String getAppMaterno() {
+        return appMaterno;
+    }
+
+    public void setAppMaterno(String appMaterno) {
+        this.appMaterno = appMaterno;
+    }
+
+    public double getSueldoBase() {
+        return sueldoBase;
+    }
+
+    public void setSueldoBase(double sueldoBase) {
+        this.sueldoBase = sueldoBase;
+    }
+
+    public String getArea() {
+        return area;
+    }
+
+    public void setArea(String area) {
+        this.area = area;
+    }
+
+    public String getSexo() {
+        return sexo;
+    }
+
+    public void setSexo(String sexo) {
+        this.sexo = sexo;
+    }
+
+    public String getEstadoCivil() {
+        return estadoCivil;
+    }
+
+    public void setEstadoCivil(String estadoCivil) {
+        this.estadoCivil = estadoCivil;
+    }
+
+    public int getNumHijos() {
+        return numHijos;
+    }
+
+    public void setNumHijos(int numHijos) {
+        this.numHijos = numHijos;
+    }
+    
 
 }
