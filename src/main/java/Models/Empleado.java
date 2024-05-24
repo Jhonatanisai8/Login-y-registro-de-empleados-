@@ -50,13 +50,12 @@ public class Empleado {
         this.estadoCivil = estadoCivil;
         this.numHijos = numHijos;
     }
-    
-    //getters y setters
 
+    //getters y setters
     public int getId() {
         return id;
     }
-    
+
     public String getNombre() {
         return nombre;
     }
@@ -120,6 +119,18 @@ public class Empleado {
     public void setNumHijos(int numHijos) {
         this.numHijos = numHijos;
     }
-    
 
+    public double bonoArea() {
+        double bonoMonto = 0;
+        switch (this.area) {
+            case "Desarrollo de Software" -> bonoMonto = this.sueldoBase * 0.05d;
+            case "Gestión de Proyectos" -> bonoMonto = this.sueldoBase * 0.03d;
+            case "Análisis y Diseño" -> bonoMonto = this.sueldoBase * 0.05d;
+            case "Soporte y Mantenimiento" -> bonoMonto = this.sueldoBase * 0.04d;
+            case "Infraestructura y Operaciones" -> bonoMonto = this.sueldoBase * 0.04d;
+            case "Innovación y Desarrollo de Nuevas Tecnologías" -> bonoMonto = this.sueldoBase * 0.04d;
+            case "ventas y Marketing" -> bonoMonto = this.sueldoBase * 0.03d;
+        }
+        return bonoMonto;
+    }
 }
