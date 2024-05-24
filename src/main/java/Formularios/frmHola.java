@@ -1,6 +1,7 @@
 package Formularios;
 
 import Vistas.RegistroUsuario;
+import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatMaterialLighterIJTheme;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.time.LocalDate;
@@ -13,29 +14,30 @@ import javax.swing.JPanel;
  * @author Jhonatan
  */
 public class frmHola extends javax.swing.JFrame {
-    
+
     public frmHola() {
         initComponents();
         obtenerFecha();
+        FlatMaterialLighterIJTheme.setup();
     }
-    
+
     private void obtenerFecha() {
         LocalDate fecha = LocalDate.now();
         Locale spanishLocalDate = new Locale("es", "Es");
         lblFecha.setText(fecha.format(DateTimeFormatter.ofPattern("'Hoy es' EEEE dd 'de' MMMM 'de' yyyy", spanishLocalDate)));
     }
-    
+
     public static void colocalarPanelEnPrincipal(JPanel panel) {
         panel.setSize(845, 465);
         panel.setLocation(0, 0);
-        
+
         contenido.removeAll();
         contenido.add(panel, BorderLayout.CENTER);
         contenido.revalidate();
         contenido.repaint();
         panel.setBackground(Color.WHITE);
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -111,6 +113,17 @@ public class frmHola extends javax.swing.JFrame {
         btnRegistro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/EMPLEADOS (2).png"))); // NOI18N
         btnRegistro.setText("Empleados");
         btnRegistro.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnRegistro.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnRegistroMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnRegistroMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnRegistroMouseExited(evt);
+            }
+        });
 
         javax.swing.GroupLayout RegistroEmpleadosBtnLayout = new javax.swing.GroupLayout(RegistroEmpleadosBtn);
         RegistroEmpleadosBtn.setLayout(RegistroEmpleadosBtnLayout);
@@ -241,7 +254,6 @@ public class frmHola extends javax.swing.JFrame {
 
     private void btnPrincipalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPrincipalMouseClicked
         // TODO add your handling code here:
-        frmHola.colocalarPanelEnPrincipal(new RegistroUsuario());
     }//GEN-LAST:event_btnPrincipalMouseClicked
 
     private void btnPrincipalMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPrincipalMouseEntered
@@ -259,6 +271,18 @@ public class frmHola extends javax.swing.JFrame {
     private void RegistroEmpleadosBtnMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_RegistroEmpleadosBtnMouseExited
         RegistroEmpleadosBtn.setBackground(new Color(1, 100, 148));
     }//GEN-LAST:event_RegistroEmpleadosBtnMouseExited
+
+    private void btnRegistroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegistroMouseClicked
+        frmHola.colocalarPanelEnPrincipal(new RegistroUsuario());
+    }//GEN-LAST:event_btnRegistroMouseClicked
+
+    private void btnRegistroMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegistroMouseEntered
+        RegistroEmpleadosBtn.setBackground(new Color(1, 84, 124));
+    }//GEN-LAST:event_btnRegistroMouseEntered
+
+    private void btnRegistroMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegistroMouseExited
+        RegistroEmpleadosBtn.setBackground(new Color(1, 100, 148));
+    }//GEN-LAST:event_btnRegistroMouseExited
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
