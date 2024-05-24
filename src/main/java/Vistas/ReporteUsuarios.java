@@ -1,5 +1,6 @@
 package Vistas;
 
+import Formularios.frmHola;
 import java.awt.Color;
 
 /**
@@ -7,16 +8,16 @@ import java.awt.Color;
  * @author Jhonatan
  */
 public class ReporteUsuarios extends javax.swing.JPanel {
-
+    
     public ReporteUsuarios() {
         initComponents();
         this.estilos();
     }
-
+    
     void estilos() {
         txtBuscar.putClientProperty("JTextField.placeholderText", "Ingrese el nombre a buscar");
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -116,6 +117,9 @@ public class ReporteUsuarios extends javax.swing.JPanel {
         btnNuevo.setText("Nuevo");
         btnNuevo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnNuevo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnNuevoMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnNuevoMouseEntered(evt);
             }
@@ -250,6 +254,10 @@ public class ReporteUsuarios extends javax.swing.JPanel {
     private void btnBuscarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarMouseEntered
         BuscarBtn.setBackground(new Color(3, 105, 160));
     }//GEN-LAST:event_btnBuscarMouseEntered
+
+    private void btnNuevoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNuevoMouseClicked
+        frmHola.colocalarPanelEnPrincipal(new RegistroUsuario());
+    }//GEN-LAST:event_btnNuevoMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
