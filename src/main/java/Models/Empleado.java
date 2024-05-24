@@ -181,4 +181,10 @@ public class Empleado {
         return montoDescuento;
     }
 
+    public double montoSueldoTotal() {
+        return this.sueldoBase
+                + bonoArea()
+                - montoSeguro()
+                - montoImpuesto();
+    }
 }
