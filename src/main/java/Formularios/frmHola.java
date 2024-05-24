@@ -1,5 +1,6 @@
 package Formularios;
 
+import Vistas.RegistroUsuario;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.time.LocalDate;
@@ -25,14 +26,14 @@ public class frmHola extends javax.swing.JFrame {
     }
     
     public static void colocalarPanelEnPrincipal(JPanel panel) {
-        panel.setSize(830, 430);
+        panel.setSize(845, 465);
         panel.setLocation(0, 0);
         
         contenido.removeAll();
         contenido.add(panel, BorderLayout.CENTER);
         contenido.revalidate();
         contenido.repaint();
-        panel.setBackground(Color.red);
+        panel.setBackground(Color.WHITE);
     }
     
     @SuppressWarnings("unchecked")
@@ -63,13 +64,25 @@ public class frmHola extends javax.swing.JFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Microsoft");
 
-        PrincipalBtn.setBackground(new java.awt.Color(0, 52, 91));
+        PrincipalBtn.setBackground(new java.awt.Color(1, 100, 148));
 
         btnPrincipal.setFont(new java.awt.Font("Segoe UI Semilight", 0, 24)); // NOI18N
         btnPrincipal.setForeground(new java.awt.Color(255, 255, 255));
         btnPrincipal.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         btnPrincipal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/PRINCIPAL.png"))); // NOI18N
         btnPrincipal.setText("Principal");
+        btnPrincipal.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnPrincipal.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnPrincipalMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnPrincipalMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnPrincipalMouseExited(evt);
+            }
+        });
 
         javax.swing.GroupLayout PrincipalBtnLayout = new javax.swing.GroupLayout(PrincipalBtn);
         PrincipalBtn.setLayout(PrincipalBtnLayout);
@@ -82,13 +95,22 @@ public class frmHola extends javax.swing.JFrame {
             .addComponent(btnPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, 62, Short.MAX_VALUE)
         );
 
-        RegistroEmpleadosBtn.setBackground(new java.awt.Color(0, 52, 91));
+        RegistroEmpleadosBtn.setBackground(new java.awt.Color(1, 100, 148));
+        RegistroEmpleadosBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                RegistroEmpleadosBtnMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                RegistroEmpleadosBtnMouseExited(evt);
+            }
+        });
 
         btnRegistro.setFont(new java.awt.Font("Segoe UI Semilight", 0, 24)); // NOI18N
         btnRegistro.setForeground(new java.awt.Color(255, 255, 255));
         btnRegistro.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         btnRegistro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/EMPLEADOS (2).png"))); // NOI18N
         btnRegistro.setText("Empleados");
+        btnRegistro.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         javax.swing.GroupLayout RegistroEmpleadosBtnLayout = new javax.swing.GroupLayout(RegistroEmpleadosBtn);
         RegistroEmpleadosBtn.setLayout(RegistroEmpleadosBtnLayout);
@@ -216,6 +238,27 @@ public class frmHola extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnPrincipalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPrincipalMouseClicked
+        // TODO add your handling code here:
+        frmHola.colocalarPanelEnPrincipal(new RegistroUsuario());
+    }//GEN-LAST:event_btnPrincipalMouseClicked
+
+    private void btnPrincipalMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPrincipalMouseEntered
+        PrincipalBtn.setBackground(new Color(1, 84, 124));
+    }//GEN-LAST:event_btnPrincipalMouseEntered
+
+    private void btnPrincipalMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPrincipalMouseExited
+        PrincipalBtn.setBackground(new Color(1, 100, 148));
+    }//GEN-LAST:event_btnPrincipalMouseExited
+
+    private void RegistroEmpleadosBtnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_RegistroEmpleadosBtnMouseEntered
+        RegistroEmpleadosBtn.setBackground(new Color(1, 84, 124));
+    }//GEN-LAST:event_RegistroEmpleadosBtnMouseEntered
+
+    private void RegistroEmpleadosBtnMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_RegistroEmpleadosBtnMouseExited
+        RegistroEmpleadosBtn.setBackground(new Color(1, 100, 148));
+    }//GEN-LAST:event_RegistroEmpleadosBtnMouseExited
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
