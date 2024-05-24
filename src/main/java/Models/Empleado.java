@@ -144,7 +144,8 @@ public class Empleado {
     public double montoSeguro() {
         double montoDescuento = 0;
         switch (this.estadoCivil) {
-            case "Soltero", "Soltera" -> montoDescuento = 100;
+            case "Soltero", "Soltera" ->
+                montoDescuento = 100;
             case "Casado", "Casada" -> {
                 if (this.numHijos > 0) {
                     montoDescuento = (this.sueldoBase) - ((this.sueldoBase - 50) - (this.numHijos * 70));
@@ -152,6 +153,30 @@ public class Empleado {
                     montoDescuento = this.sueldoBase - 120;
                 }
             }
+        }
+        return montoDescuento;
+    }
+
+    public double montoAreaMasSuedoBase() {
+        return this.sueldoBase + this.bonoArea();
+    }
+
+    public double montoImpuesto() {
+        double montoDescuento = 0;
+        if (montoAreaMasSuedoBase() > 0 && montoAreaMasSuedoBase() <= 2500) {
+            montoDescuento = 0;
+        }
+
+        if (montoAreaMasSuedoBase() >= 2501 && montoAreaMasSuedoBase() <= 4300) {
+            montoDescuento = montoAreaMasSuedoBase() * 0.03;
+        }
+
+        if (montoAreaMasSuedoBase() >= 4301 && montoAreaMasSuedoBase() <= 6000) {
+            montoDescuento = montoAreaMasSuedoBase() * 0.46;
+        }
+
+        if (montoAreaMasSuedoBase() >= 6001) {
+            montoDescuento = montoAreaMasSuedoBase() * 0.10;
         }
         return montoDescuento;
     }
