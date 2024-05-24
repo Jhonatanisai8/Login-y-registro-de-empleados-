@@ -1,5 +1,6 @@
 package Vistas;
 
+import Models.Utelerias;
 import java.awt.Color;
 
 /**
@@ -8,9 +9,13 @@ import java.awt.Color;
  */
 public class RegistroUsuario extends javax.swing.JPanel {
 
+    Utelerias utelerias = new Utelerias();
+
     public RegistroUsuario() {
         initComponents();
         this.estilosCampos();
+        //llamamos al metodo en el contructor de este formulario
+        utelerias.rellenarCombo("area", "nombre", cbxArea);
     }
 
     void estilosCampos() {
@@ -45,7 +50,7 @@ public class RegistroUsuario extends javax.swing.JPanel {
         jLabel9 = new javax.swing.JLabel();
         RegistrarBtn = new javax.swing.JPanel();
         btnRegistrar = new javax.swing.JLabel();
-        cbxEstadoCivil1 = new javax.swing.JComboBox<>();
+        cbxArea = new javax.swing.JComboBox<>();
 
         jLabel1.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 0, 20)); // NOI18N
         jLabel1.setText("Registro de un nuevo Empleado:");
@@ -130,7 +135,11 @@ public class RegistroUsuario extends javax.swing.JPanel {
             .addComponent(btnRegistrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        cbxEstadoCivil1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "=Seleccionar=", "Recursos Humanos", "Ventas", "Marketing", "Gestión" }));
+        cbxArea.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxAreaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -190,7 +199,7 @@ public class RegistroUsuario extends javax.swing.JPanel {
                         .addGap(70, 70, 70)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(cbxEstadoCivil1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(cbxArea, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGap(95, 95, 95))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -236,7 +245,7 @@ public class RegistroUsuario extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cbxEstadoCivil1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cbxArea, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(41, 41, 41)
                         .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -273,12 +282,16 @@ public class RegistroUsuario extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNombreActionPerformed
 
+    private void cbxAreaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxAreaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbxAreaActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel RegistrarBtn;
     private javax.swing.JLabel btnRegistrar;
+    private javax.swing.JComboBox<String> cbxArea;
     private javax.swing.JComboBox<String> cbxEstadoCivil;
-    private javax.swing.JComboBox<String> cbxEstadoCivil1;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JLabel jLabel1;
