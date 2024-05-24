@@ -27,9 +27,9 @@ public class frmInicio extends javax.swing.JFrame {
 
     void iniciarSesion() {
         try {
+            String user, password;
             String campo = Utelerias.validarCampos(txtUsuario, txtContrasenia);
             if (campo.equals("")) {
-                String user, password;
                 user = txtUsuario.getText();
                 password = String.valueOf(txtContrasenia.getText());
                 userDaoImple = new UserDaoImple();
@@ -38,13 +38,17 @@ public class frmInicio extends javax.swing.JFrame {
                     p.setVisible(true);
                     dispose();
                 } else {
-                    JOptionPane.showMessageDialog(rootPane, "Usuario con nombre: " + user + ", no encontrado", "ATENCIÓN", 3);
+                    JOptionPane.showMessageDialog(rootPane, "Usuario con nombre: " + user + ", no encontrado", "ATENCIÓN", JOptionPane.WARNING_MESSAGE);
+                    txtContrasenia.setText("**********");
+                    txtContrasenia.setForeground(Color.GRAY);
+                    txtUsuario.setText("Ingrese su nombre de usuario");
+                    txtUsuario.setForeground(Color.GRAY);
                 }
             } else {
-                JOptionPane.showMessageDialog(rootPane, "VERIQUE LOS CAMPOS EN: " + campo, "ATENCIÓN", 3);
+                JOptionPane.showMessageDialog(rootPane, "Verifiquen en " + campo, "ATENCIÓN", JOptionPane.WARNING_MESSAGE);
             }
         } catch (HeadlessException e) {
-            JOptionPane.showMessageDialog(rootPane, "ERROR: " + e.toString(), "ATENCIÓN", 3);
+            JOptionPane.showMessageDialog(rootPane, "ERROR: " + e.toString(), "ATENCIÓN", JOptionPane.WARNING_MESSAGE);
         }
     }
 
