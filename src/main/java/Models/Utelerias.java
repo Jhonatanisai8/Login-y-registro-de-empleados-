@@ -6,6 +6,8 @@ import javax.swing.JTextField;
 import java.sql.*;
 import javax.swing.ButtonGroup;
 import javax.swing.JRadioButton;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -79,5 +81,34 @@ public class Utelerias {
             return "Campo Sexo";
         }
         return "";
+    }
+
+    //METODO PARA VER LOS REGISTROS EN UN JTABLE
+    public  void cargarTable(DefaultTableModel modelo, JTable tblDatos) {
+
+        String sql = "SELECT empleados.id, empleados.nombre, empleados.appPaterno, empleados.appMaterno, empleados.sueldoBase, area.nombre, empleados.estadoCivil, empleados.sueldoTotal FROM empleados INNER JOIN area ON area.id = empleados.idArea";
+        try {
+            Connection conectar = conexion.conectarBD();
+            PreparedStatement consultaPreparada = conectar.prepareStatement(sql);
+            ResultSet resultado = consultaPreparada.executeQuery();
+
+            //obtenemos los datos de la tabla en la base de datos
+            ResultSetMetaData datos = resultado.getMetaData();
+            int cantColumnas = datos.getColumnCount();
+
+            //cargamos los datos 
+            while (resultado.next()) {
+                Object arreglo[] = new Object[cantColumnas];
+                for (int i = 0; i < cantColumnas; i++) {
+                    arreglo[i] = resultado.getObject(i + 1);
+                }
+                modelo.addRow(arreglo);
+            }
+
+            tblDatos.setModel(modelo);
+            conexion.desconectaBD();
+        } catch (SQLException e) {
+            System.out.println("Error al mostrar tabla: " + e.toString());
+        }
     }
 }
