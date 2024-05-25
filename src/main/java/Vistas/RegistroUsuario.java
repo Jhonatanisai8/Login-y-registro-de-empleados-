@@ -11,13 +11,13 @@ import javax.swing.JOptionPane;
  * @author Jhonatan
  */
 public class RegistroUsuario extends javax.swing.JPanel {
-    
+
     Utelerias utelerias = new Utelerias();
 
     //objetos de la clase empleadoDao y empleadoDaoImple
     EmpleadoDaoImple empleadoDaoImple = new EmpleadoDaoImple();
     Empleado empleado;
-    
+
     public RegistroUsuario() {
         initComponents();
         this.estilosCampos();
@@ -27,7 +27,7 @@ public class RegistroUsuario extends javax.swing.JPanel {
         botones.add(bMujer);
         botones.add(bHombre);
     }
-    
+
     void estilosCampos() {
         txtNombre.putClientProperty("JTextField.placeholderText", "Ingrese el nombre");
         txtApellidoMaterno.putClientProperty("JTextField.placeholderText", "Ingrese el Apellido Materno");
@@ -35,7 +35,7 @@ public class RegistroUsuario extends javax.swing.JPanel {
         txtSueldoBase.putClientProperty("JTextField.placeholderText", "Ingrese el sueldo base");
         txtNumHijos.putClientProperty("JTextField.placeholderText", "Cant. Hijos");
     }
-    
+
     public void registrarEmpleado() {
         //metodo para insertar
         String campos = Utelerias.validarCamposFormularioRegistrarUsuario(txtNombre, txtApellidoPaterno, txtApellidoMaterno, txtSueldoBase, txtNumHijos, botones);
@@ -49,7 +49,7 @@ public class RegistroUsuario extends javax.swing.JPanel {
             String sexo = "";
             String estadoCivil;
             int numHijos;
-            
+
             nombre = txtNombre.getText();
             appPaterno = txtApellidoPaterno.getText();
             appMaterno = txtApellidoMaterno.getText();
@@ -70,17 +70,19 @@ public class RegistroUsuario extends javax.swing.JPanel {
                     empleado = new Empleado(nombre, appPaterno, appMaterno, sueldoBase, area, sexo, estadoCivil, numHijos);
                     empleadoDaoImple.insertarEmpleado(empleado);
                     JOptionPane.showMessageDialog(null, "Empleado con nombre " + nombre + " registrado", "ATENCIÓN", JOptionPane.INFORMATION_MESSAGE);
+                    Utelerias.limpiarCamposFormularioRegistrarUsuario(txtNombre, txtApellidoPaterno, txtApellidoMaterno, txtSueldoBase, txtNumHijos, cbxArea, cbxEstadoCivil);
                 }
             } else {
                 empleado = new Empleado(nombre, appPaterno, appMaterno, sueldoBase, area, sexo, estadoCivil, 0);
                 empleadoDaoImple.insertarEmpleado(empleado);
                 JOptionPane.showMessageDialog(null, "Empleado con nombre " + nombre + " registrado", "ATENCIÓN", JOptionPane.INFORMATION_MESSAGE);
+                Utelerias.limpiarCamposFormularioRegistrarUsuario(txtNombre, txtApellidoPaterno, txtApellidoMaterno, txtSueldoBase, txtNumHijos, cbxArea, cbxEstadoCivil);
             }
         } else {
             JOptionPane.showMessageDialog(null, "Verificar en " + campos, "ATENCIÓN", JOptionPane.WARNING_MESSAGE);
         }
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -360,7 +362,7 @@ public class RegistroUsuario extends javax.swing.JPanel {
     private void bHombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bHombreActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_bHombreActionPerformed
-    
+
     public void activarCamposHijos(String valor) {
         if (valor.equalsIgnoreCase("Casado") || valor.equalsIgnoreCase("Casada")) {
             txtNumHijos.setVisible(true);
