@@ -3,6 +3,7 @@ package Formularios;
 import Vistas.Bienvenida;
 import Vistas.RegistroUsuario;
 import Vistas.ReporteUsuarios;
+import Vistas.ReportesTotales;
 import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatMaterialLighterIJTheme;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -385,7 +386,7 @@ public class frmHola extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRegistroMouseExited
 
     private void btnReportesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReportesMouseClicked
-        // TODO add your handling code here:
+        frmHola.colocalarPanelEnPrincipal(new ReportesTotales());
     }//GEN-LAST:event_btnReportesMouseClicked
 
     private void btnReportesMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReportesMouseEntered
