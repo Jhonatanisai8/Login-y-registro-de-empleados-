@@ -43,7 +43,7 @@ public class UserDaoImple implements UsuarioDao {
             Connection conectar = conexion.conectarBD();
             String sql = "SELECT  * FROM usuarios WHERE usuario = '" + user + "' and password = '" + pass + "'";
             PreparedStatement buscar = conectar.prepareStatement(sql);
-
+            
             ResultSet consulta = buscar.executeQuery();
             if (consulta.next()) {
                 return true;
