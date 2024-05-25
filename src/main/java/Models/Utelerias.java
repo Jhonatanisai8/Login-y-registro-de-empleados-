@@ -54,29 +54,29 @@ public class Utelerias {
     public static String validarCamposFormularioRegistrarUsuario(JTextField txtNombre, JTextField txtAppPaterno, JTextField txtappMaterno,
             JTextField txtSueldoBase, JTextField txtNumHijos, ButtonGroup botones) {
 
-        if (txtNombre.getText().trim().isEmpty() || txtAppPaterno.getText().trim().isEmpty() || txtappMaterno.getText().trim().isEmpty()
-                || txtSueldoBase.getText().trim().isEmpty() || txtNumHijos.getText().trim().isEmpty()) {
+        if (txtNombre.getText().trim().isEmpty() && txtAppPaterno.getText().trim().isEmpty() && txtappMaterno.getText().trim().isEmpty()
+                && txtSueldoBase.getText().trim().isEmpty() && txtNumHijos.getText().trim().isEmpty()) {
             return "Todos los campos";
         }
 
         if (txtNombre.getText().trim().isEmpty()) {
-            return "Nombre";
+            return " Campo Nombre";
         }
 
         if (txtAppPaterno.getText().trim().isEmpty()) {
-            return "Apellido Paterno";
+            return "Campo Apellido Paterno";
         }
 
         if (txtappMaterno.getText().trim().isEmpty()) {
-            return "Apellido Materno";
+            return "Campo Apellido Materno";
         }
 
-        if ((txtSueldoBase.getText().trim().isEmpty()) || (Double.parseDouble(txtSueldoBase.getText()) < 0)) {
-            return "Sueldo Base";
+        if ((txtSueldoBase.getText().trim().isEmpty()) || (Double.parseDouble(txtSueldoBase.getText()) <= 0)) {
+            return "Campon Sueldo Base";
         }
 
         if (botones.getSelection() == null) {
-            return "Sexo";
+            return "Campo Sexo";
         }
         return "";
     }
