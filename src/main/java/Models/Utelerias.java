@@ -4,6 +4,8 @@ import javax.swing.JComboBox;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import java.sql.*;
+import javax.swing.ButtonGroup;
+import javax.swing.JRadioButton;
 
 /**
  *
@@ -33,7 +35,7 @@ public class Utelerias {
         String sql = "SELECT nombre FROM " + tabla;
         Connection conectar = conexion.conectarBD();
         Statement st;
-        
+
         try {
             st = conectar.createStatement();
             ResultSet consulta = st.executeQuery(sql);
@@ -46,5 +48,36 @@ public class Utelerias {
         } catch (SQLException e) {
             System.out.println("Error al llenar combo box: " + e.toString());
         }
+    }
+
+    //metodos para validar que los campos no esten vacios
+    public static String validarCamposFormularioRegistrarUsuario(JTextField txtNombre, JTextField txtAppPaterno, JTextField txtappMaterno,
+            JTextField txtSueldoBase, JTextField txtNumHijos, ButtonGroup botones) {
+
+        if (txtNombre.getText().trim().isEmpty() || txtAppPaterno.getText().trim().isEmpty() || txtappMaterno.getText().trim().isEmpty()
+                || txtSueldoBase.getText().trim().isEmpty() || txtNumHijos.getText().trim().isEmpty()) {
+            return "Todos los campos";
+        }
+
+        if (txtNombre.getText().trim().isEmpty()) {
+            return "Nombre";
+        }
+
+        if (txtAppPaterno.getText().trim().isEmpty()) {
+            return "Apellido Paterno";
+        }
+
+        if (txtappMaterno.getText().trim().isEmpty()) {
+            return "Apellido Materno";
+        }
+
+        if ((txtSueldoBase.getText().trim().isEmpty()) || (Double.parseDouble(txtSueldoBase.getText()) < 0)) {
+            return "Sueldo Base";
+        }
+
+        if (botones.getSelection() == null) {
+            return "Sexo";
+        }
+        return "";
     }
 }
