@@ -42,7 +42,7 @@ public class Bienvenida extends javax.swing.JPanel {
         jLabel2.setText("Sistema de Crud de empleados ");
 
         jLabel3.setFont(new java.awt.Font("SimHei", 0, 15)); // NOI18N
-        jLabel3.setText("Forma Óptima y facil de flujo de datos de empleados de esta empresa.");
+        jLabel3.setText("Forma optima y facil de flujo de datos de empleados de esta empresa.");
 
         jLabel4.setFont(new java.awt.Font("SimHei", 0, 15)); // NOI18N
         jLabel4.setText("Esta Herramienta le permitirá llevar un control completo y detallado de la gestion de empleados.");
@@ -57,7 +57,7 @@ public class Bienvenida extends javax.swing.JPanel {
         jLabel7.setText("Modificar los datos de un empleado.");
 
         jLabel8.setFont(new java.awt.Font("SimHei", 0, 15)); // NOI18N
-        jLabel8.setText("Eliminar un resgistro.");
+        jLabel8.setText("Eliminar un registro.");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
