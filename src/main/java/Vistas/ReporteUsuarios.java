@@ -1,23 +1,31 @@
 package Vistas;
 
 import Formularios.frmHola;
+import Models.Utelerias;
 import java.awt.Color;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author Jhonatan
  */
 public class ReporteUsuarios extends javax.swing.JPanel {
-    
+
+    String cabezera[] = {"ID", "NOMBRES", "APELLIDO PATERNO", "APELLIDO MATERNO", "SUELDO BASE", "ÁREA", "ESTADO CIVIL", "SUELDO TOTAL"};
+    DefaultTableModel modelo = new DefaultTableModel(cabezera, 0);
+
+    Utelerias utelerias = new Utelerias();
+
     public ReporteUsuarios() {
         initComponents();
         this.estilos();
+        utelerias.cargarTable(modelo, btlDatos);
     }
-    
+
     void estilos() {
         txtBuscar.putClientProperty("JTextField.placeholderText", "Ingrese el nombre a buscar");
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -41,13 +49,10 @@ public class ReporteUsuarios extends javax.swing.JPanel {
 
         btlDatos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "ID", "NOMBRE", "APELLIDO PATERNO", "APPELLIDO MATERNO", "SUELDO BASE", "ÁREA", "ESTADO CIVIL", "SUELDO TOTAL"
             }
         ));
         jScrollPane1.setViewportView(btlDatos);
