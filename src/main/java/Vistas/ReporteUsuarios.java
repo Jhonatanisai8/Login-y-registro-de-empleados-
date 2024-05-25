@@ -3,6 +3,7 @@ package Vistas;
 import Formularios.frmHola;
 import Models.Utelerias;
 import java.awt.Color;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -156,6 +157,9 @@ public class ReporteUsuarios extends javax.swing.JPanel {
         btnBuscar.setText("Buscar");
         btnBuscar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnBuscar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnBuscarMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnBuscarMouseEntered(evt);
             }
@@ -263,6 +267,12 @@ public class ReporteUsuarios extends javax.swing.JPanel {
     private void btnNuevoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNuevoMouseClicked
         frmHola.colocalarPanelEnPrincipal(new RegistroUsuario());
     }//GEN-LAST:event_btnNuevoMouseClicked
+
+    private void btnBuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarMouseClicked
+        if (txtBuscar.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Por favor Ingrese el nombre a Buscar", "ATENCIÓN", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_btnBuscarMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
