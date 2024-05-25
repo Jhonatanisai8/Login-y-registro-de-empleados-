@@ -4,27 +4,30 @@ import DaoImplementacion.EmpleadoDaoImple;
 import Models.Empleado;
 import Models.Utelerias;
 import java.awt.Color;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author Jhonatan
  */
 public class RegistroUsuario extends javax.swing.JPanel {
-    
+
     Utelerias utelerias = new Utelerias();
 
     //objetos de la clase empleadoDao y empleadoDaoImple
     EmpleadoDaoImple empleadoDaoImple = new EmpleadoDaoImple();
     Empleado empleado;
-    
+
     public RegistroUsuario() {
         initComponents();
         this.estilosCampos();
         //llamamos al metodo en el contructor de este formulario
         utelerias.rellenarCombo("area", "nombre", cbxArea);
         activarCamposHijos("Casado");
+        botones.add(bMujer);
+        botones.add(bHombre);
     }
-    
+
     void estilosCampos() {
         txtNombre.putClientProperty("JTextField.placeholderText", "Ingrese el nombre");
         txtApellidoMaterno.putClientProperty("JTextField.placeholderText", "Ingrese el Apellido Materno");
@@ -32,11 +35,12 @@ public class RegistroUsuario extends javax.swing.JPanel {
         txtSueldoBase.putClientProperty("JTextField.placeholderText", "Ingrese el sueldo base");
         txtNumHijos.putClientProperty("JTextField.placeholderText", "Cant. Hijos");
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        botones = new javax.swing.ButtonGroup();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         txtNombre = new javax.swing.JTextField();
@@ -50,14 +54,14 @@ public class RegistroUsuario extends javax.swing.JPanel {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         cbxEstadoCivil = new javax.swing.JComboBox<>();
-        jCheckBox1 = new javax.swing.JCheckBox();
-        jCheckBox2 = new javax.swing.JCheckBox();
         jLabel8 = new javax.swing.JLabel();
         txtNumHijos = new javax.swing.JTextField();
         lblHijos = new javax.swing.JLabel();
         RegistrarBtn = new javax.swing.JPanel();
         btnRegistrar = new javax.swing.JLabel();
         cbxArea = new javax.swing.JComboBox<>();
+        bHombre = new javax.swing.JRadioButton();
+        bMujer = new javax.swing.JRadioButton();
 
         jLabel1.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 0, 20)); // NOI18N
         jLabel1.setText("Registro de un nuevo Empleado:");
@@ -95,21 +99,12 @@ public class RegistroUsuario extends javax.swing.JPanel {
         jLabel7.setFont(new java.awt.Font("Comic Sans MS", 0, 15)); // NOI18N
         jLabel7.setText("Estado Civil:");
 
-        cbxEstadoCivil.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "=Seleccionar=", "Casado", "Soltero" }));
+        cbxEstadoCivil.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Casado", "Soltero" }));
         cbxEstadoCivil.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbxEstadoCivilActionPerformed(evt);
             }
         });
-
-        jCheckBox1.setText("Masculino");
-        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox1ActionPerformed(evt);
-            }
-        });
-
-        jCheckBox2.setText("Femenino");
 
         jLabel8.setFont(new java.awt.Font("Comic Sans MS", 0, 15)); // NOI18N
         jLabel8.setText("Sexo:");
@@ -158,6 +153,10 @@ public class RegistroUsuario extends javax.swing.JPanel {
             }
         });
 
+        bHombre.setText("Masculino");
+
+        bMujer.setText("Femenino");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -176,7 +175,7 @@ public class RegistroUsuario extends javax.swing.JPanel {
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE)
+                                        .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
                                         .addGap(6, 6, 6))
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -221,16 +220,17 @@ public class RegistroUsuario extends javax.swing.JPanel {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGap(79, 79, 79))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jCheckBox1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(bHombre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jCheckBox2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(55, 55, 55)))
-                        .addGap(79, 79, 79)))
+                                .addComponent(bMujer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(131, 131, 131))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(79, 79, 79)))))
                 .addGap(62, 62, 62))
         );
         layout.setVerticalGroup(
@@ -267,8 +267,8 @@ public class RegistroUsuario extends javax.swing.JPanel {
                         .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jCheckBox1)
-                            .addComponent(jCheckBox2))
+                            .addComponent(bHombre)
+                            .addComponent(bMujer))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -282,10 +282,6 @@ public class RegistroUsuario extends javax.swing.JPanel {
                         .addGap(17, 17, 17))))
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox1ActionPerformed
 
     private void RegistrarBtnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_RegistrarBtnMouseEntered
         RegistrarBtn.setBackground(new Color(1, 97, 143));
@@ -304,13 +300,44 @@ public class RegistroUsuario extends javax.swing.JPanel {
     }//GEN-LAST:event_cbxAreaActionPerformed
 
     private void btnRegistrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegistrarMouseClicked
-       
+        //metodo para insertar
+        int id;
+        String nombre;
+        String appPaterno;
+        String appMaterno;
+        double sueldoBase;
+        String area;
+        String sexo = "";
+        String estadoCivil;
+        int numHijos;
+
+        nombre = txtNombre.getText();
+        appPaterno = txtApellidoPaterno.getText();
+        appMaterno = txtApellidoMaterno.getText();
+        sueldoBase = Double.parseDouble(txtSueldoBase.getText());
+        area = cbxArea.getSelectedItem().toString();
+        if (bMujer.isSelected()) {
+            sexo = "Femenino";
+        }
+        if (bHombre.isSelected()) {
+            sexo = "Masculino";
+        }
+        estadoCivil = cbxEstadoCivil.getSelectedItem().toString();
+        if (estadoCivil.equalsIgnoreCase("Casado")) {
+            numHijos = Integer.parseInt(txtNumHijos.getText());
+            empleado = new Empleado(nombre, appPaterno, appMaterno, sueldoBase, area, sexo, estadoCivil, numHijos);
+            empleadoDaoImple.insertarEmpleado(empleado);
+            JOptionPane.showMessageDialog(null, "Empleado con nombre " + nombre + " registrado", "ATENCIÓN", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            empleado = new Empleado(nombre, appPaterno, appMaterno, sueldoBase, area, sexo, estadoCivil, 0);
+            empleadoDaoImple.insertarEmpleado(empleado);
+        }
     }//GEN-LAST:event_btnRegistrarMouseClicked
 
     private void cbxEstadoCivilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxEstadoCivilActionPerformed
         activarCamposHijos(cbxEstadoCivil.getSelectedItem().toString());
     }//GEN-LAST:event_cbxEstadoCivilActionPerformed
-    
+
     public void activarCamposHijos(String valor) {
         if (valor.equalsIgnoreCase("Casado") || valor.equalsIgnoreCase("Casada")) {
             txtNumHijos.setVisible(true);
@@ -323,11 +350,12 @@ public class RegistroUsuario extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel RegistrarBtn;
+    private javax.swing.JRadioButton bHombre;
+    private javax.swing.JRadioButton bMujer;
+    private javax.swing.ButtonGroup botones;
     private javax.swing.JLabel btnRegistrar;
     private javax.swing.JComboBox<String> cbxArea;
     private javax.swing.JComboBox<String> cbxEstadoCivil;
-    private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
