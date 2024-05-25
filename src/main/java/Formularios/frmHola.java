@@ -52,6 +52,10 @@ public class frmHola extends javax.swing.JFrame {
         btnPrincipal = new javax.swing.JLabel();
         RegistroEmpleadosBtn = new javax.swing.JPanel();
         btnRegistro = new javax.swing.JLabel();
+        ReportesBtn = new javax.swing.JPanel();
+        btnReportes = new javax.swing.JLabel();
+        GraficosBtn = new javax.swing.JPanel();
+        btnGraficos = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         Header = new javax.swing.JPanel();
         lblFecha = new javax.swing.JLabel();
@@ -65,7 +69,7 @@ public class frmHola extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(0, 52, 91));
 
-        jLabel1.setFont(new java.awt.Font("SimHei", 0, 20)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("SimSun-ExtB", 1, 25)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Jhonatan's");
@@ -140,6 +144,84 @@ public class frmHola extends javax.swing.JFrame {
             .addComponent(btnRegistro, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE)
         );
 
+        ReportesBtn.setBackground(new java.awt.Color(1, 100, 148));
+        ReportesBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                ReportesBtnMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                ReportesBtnMouseExited(evt);
+            }
+        });
+
+        btnReportes.setFont(new java.awt.Font("Segoe UI Semilight", 0, 24)); // NOI18N
+        btnReportes.setForeground(new java.awt.Color(255, 255, 255));
+        btnReportes.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnReportes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/Reportes.png"))); // NOI18N
+        btnReportes.setText("Reportes");
+        btnReportes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnReportes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnReportesMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnReportesMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnReportesMouseExited(evt);
+            }
+        });
+
+        javax.swing.GroupLayout ReportesBtnLayout = new javax.swing.GroupLayout(ReportesBtn);
+        ReportesBtn.setLayout(ReportesBtnLayout);
+        ReportesBtnLayout.setHorizontalGroup(
+            ReportesBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(btnReportes, javax.swing.GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE)
+        );
+        ReportesBtnLayout.setVerticalGroup(
+            ReportesBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(btnReportes, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE)
+        );
+
+        GraficosBtn.setBackground(new java.awt.Color(1, 100, 148));
+        GraficosBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                GraficosBtnMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                GraficosBtnMouseExited(evt);
+            }
+        });
+
+        btnGraficos.setFont(new java.awt.Font("Segoe UI Semilight", 0, 24)); // NOI18N
+        btnGraficos.setForeground(new java.awt.Color(255, 255, 255));
+        btnGraficos.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnGraficos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/GRAFICOS.png"))); // NOI18N
+        btnGraficos.setText("Graficos");
+        btnGraficos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnGraficos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnGraficosMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnGraficosMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnGraficosMouseExited(evt);
+            }
+        });
+
+        javax.swing.GroupLayout GraficosBtnLayout = new javax.swing.GroupLayout(GraficosBtn);
+        GraficosBtn.setLayout(GraficosBtnLayout);
+        GraficosBtnLayout.setHorizontalGroup(
+            GraficosBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(btnGraficos, javax.swing.GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE)
+        );
+        GraficosBtnLayout.setVerticalGroup(
+            GraficosBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(btnGraficos, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -152,7 +234,9 @@ public class frmHola extends javax.swing.JFrame {
                 .addGap(46, 46, 46)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(PrincipalBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(RegistroEmpleadosBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(RegistroEmpleadosBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(ReportesBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(GraficosBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(47, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -164,7 +248,11 @@ public class frmHola extends javax.swing.JFrame {
                 .addComponent(PrincipalBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(RegistroEmpleadosBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(324, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(ReportesBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(GraficosBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(168, Short.MAX_VALUE))
         );
 
         jLabel2.setBackground(new java.awt.Color(153, 153, 153));
@@ -295,6 +383,46 @@ public class frmHola extends javax.swing.JFrame {
     private void btnRegistroMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegistroMouseExited
         RegistroEmpleadosBtn.setBackground(new Color(1, 100, 148));
     }//GEN-LAST:event_btnRegistroMouseExited
+
+    private void btnReportesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReportesMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnReportesMouseClicked
+
+    private void btnReportesMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReportesMouseEntered
+        ReportesBtn.setBackground(new Color(1, 84, 124));
+    }//GEN-LAST:event_btnReportesMouseEntered
+
+    private void btnReportesMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReportesMouseExited
+        ReportesBtn.setBackground(new Color(1, 100, 148));
+    }//GEN-LAST:event_btnReportesMouseExited
+
+    private void ReportesBtnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ReportesBtnMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ReportesBtnMouseEntered
+
+    private void ReportesBtnMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ReportesBtnMouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ReportesBtnMouseExited
+
+    private void btnGraficosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGraficosMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnGraficosMouseClicked
+
+    private void btnGraficosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGraficosMouseEntered
+        GraficosBtn.setBackground(new Color(1, 84, 124));
+    }//GEN-LAST:event_btnGraficosMouseEntered
+
+    private void btnGraficosMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGraficosMouseExited
+        GraficosBtn.setBackground(new Color(1, 100, 148));
+    }//GEN-LAST:event_btnGraficosMouseExited
+
+    private void GraficosBtnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_GraficosBtnMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_GraficosBtnMouseEntered
+
+    private void GraficosBtnMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_GraficosBtnMouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_GraficosBtnMouseExited
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -328,11 +456,15 @@ public class frmHola extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel GraficosBtn;
     private javax.swing.JPanel Header;
     private javax.swing.JPanel PrincipalBtn;
     private javax.swing.JPanel RegistroEmpleadosBtn;
+    private javax.swing.JPanel ReportesBtn;
+    private javax.swing.JLabel btnGraficos;
     private javax.swing.JLabel btnPrincipal;
     private javax.swing.JLabel btnRegistro;
+    private javax.swing.JLabel btnReportes;
     private static javax.swing.JPanel contenido;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
