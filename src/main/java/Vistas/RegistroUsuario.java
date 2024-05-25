@@ -36,6 +36,47 @@ public class RegistroUsuario extends javax.swing.JPanel {
         txtNumHijos.putClientProperty("JTextField.placeholderText", "Cant. Hijos");
     }
 
+    public void registrarEmpleado() {
+        //metodo para insertar
+        String campos = Utelerias.validarCamposFormularioRegistrarUsuario(txtNombre, txtApellidoPaterno, txtApellidoMaterno, txtSueldoBase, txtNumHijos, botones);
+        if (campos.equals("")) {
+            int id;
+            String nombre;
+            String appPaterno;
+            String appMaterno;
+            double sueldoBase;
+            String area;
+            String sexo = "";
+            String estadoCivil;
+            int numHijos;
+
+            nombre = txtNombre.getText();
+            appPaterno = txtApellidoPaterno.getText();
+            appMaterno = txtApellidoMaterno.getText();
+            sueldoBase = Double.parseDouble(txtSueldoBase.getText());
+            area = cbxArea.getSelectedItem().toString();
+            if (bMujer.isSelected()) {
+                sexo = "Femenino";
+            }
+            if (bHombre.isSelected()) {
+                sexo = "Masculino";
+            }
+            estadoCivil = cbxEstadoCivil.getSelectedItem().toString();
+            if (estadoCivil.equalsIgnoreCase("Casado")) {
+                numHijos = Integer.parseInt(txtNumHijos.getText());
+                empleado = new Empleado(nombre, appPaterno, appMaterno, sueldoBase, area, sexo, estadoCivil, numHijos);
+                empleadoDaoImple.insertarEmpleado(empleado);
+                JOptionPane.showMessageDialog(null, "Empleado con nombre " + nombre + " registrado", "ATENCIÓN", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                empleado = new Empleado(nombre, appPaterno, appMaterno, sueldoBase, area, sexo, estadoCivil, 0);
+                empleadoDaoImple.insertarEmpleado(empleado);
+                JOptionPane.showMessageDialog(null, "Empleado con nombre " + nombre + " registrado", "ATENCIÓN", JOptionPane.INFORMATION_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Verificar en " + campos, "ATENCIÓN", JOptionPane.WARNING_MESSAGE);
+        }
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -154,6 +195,11 @@ public class RegistroUsuario extends javax.swing.JPanel {
         });
 
         bHombre.setText("Masculino");
+        bHombre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bHombreActionPerformed(evt);
+            }
+        });
 
         bMujer.setText("Femenino");
 
@@ -300,43 +346,16 @@ public class RegistroUsuario extends javax.swing.JPanel {
     }//GEN-LAST:event_cbxAreaActionPerformed
 
     private void btnRegistrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegistrarMouseClicked
-        //metodo para insertar
-        int id;
-        String nombre;
-        String appPaterno;
-        String appMaterno;
-        double sueldoBase;
-        String area;
-        String sexo = "";
-        String estadoCivil;
-        int numHijos;
-
-        nombre = txtNombre.getText();
-        appPaterno = txtApellidoPaterno.getText();
-        appMaterno = txtApellidoMaterno.getText();
-        sueldoBase = Double.parseDouble(txtSueldoBase.getText());
-        area = cbxArea.getSelectedItem().toString();
-        if (bMujer.isSelected()) {
-            sexo = "Femenino";
-        }
-        if (bHombre.isSelected()) {
-            sexo = "Masculino";
-        }
-        estadoCivil = cbxEstadoCivil.getSelectedItem().toString();
-        if (estadoCivil.equalsIgnoreCase("Casado")) {
-            numHijos = Integer.parseInt(txtNumHijos.getText());
-            empleado = new Empleado(nombre, appPaterno, appMaterno, sueldoBase, area, sexo, estadoCivil, numHijos);
-            empleadoDaoImple.insertarEmpleado(empleado);
-            JOptionPane.showMessageDialog(null, "Empleado con nombre " + nombre + " registrado", "ATENCIÓN", JOptionPane.INFORMATION_MESSAGE);
-        } else {
-            empleado = new Empleado(nombre, appPaterno, appMaterno, sueldoBase, area, sexo, estadoCivil, 0);
-            empleadoDaoImple.insertarEmpleado(empleado);
-        }
+        registrarEmpleado();
     }//GEN-LAST:event_btnRegistrarMouseClicked
 
     private void cbxEstadoCivilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxEstadoCivilActionPerformed
         activarCamposHijos(cbxEstadoCivil.getSelectedItem().toString());
     }//GEN-LAST:event_cbxEstadoCivilActionPerformed
+
+    private void bHombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bHombreActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bHombreActionPerformed
 
     public void activarCamposHijos(String valor) {
         if (valor.equalsIgnoreCase("Casado") || valor.equalsIgnoreCase("Casada")) {
