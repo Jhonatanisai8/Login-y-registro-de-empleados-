@@ -19,7 +19,7 @@ public class ReporteUsuarios extends javax.swing.JPanel {
     public ReporteUsuarios() {
         initComponents();
         this.estilos();
-        utelerias.cargarTable(modelo, btlDatos);
+        utelerias.cargarTable(modelo, btlDatos, 0);
     }
 
     void estilos() {
