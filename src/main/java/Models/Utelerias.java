@@ -62,18 +62,22 @@ public class Utelerias {
         }
 
         if (txtNombre.getText().trim().isEmpty()) {
+            txtNombre.requestFocus();
             return " Campo Nombre";
         }
 
         if (txtAppPaterno.getText().trim().isEmpty()) {
+            txtAppPaterno.requestFocus();
             return "Campo Apellido Paterno";
         }
 
         if (txtappMaterno.getText().trim().isEmpty()) {
+            txtappMaterno.requestFocus();
             return "Campo Apellido Materno";
         }
 
         if ((txtSueldoBase.getText().trim().isEmpty()) || (Double.parseDouble(txtSueldoBase.getText()) <= 0)) {
+            txtSueldoBase.requestFocus();
             return "Campon Sueldo Base";
         }
 
