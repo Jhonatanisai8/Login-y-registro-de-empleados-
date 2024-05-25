@@ -148,7 +148,7 @@ public class Empleado {
                 montoDescuento = 100;
             case "Casado", "Casada" -> {
                 if (this.numHijos > 0) {
-                    montoDescuento = (this.sueldoBase) - ((this.sueldoBase - 50) - (this.numHijos * 70));
+                    montoDescuento = (this.sueldoBase) - ((this.sueldoBase - 50) - (this.numHijos * 50));
                 } else {
                     montoDescuento = this.sueldoBase - 120;
                 }
@@ -172,7 +172,7 @@ public class Empleado {
         }
 
         if (montoAreaMasSuedoBase() >= 4301 && montoAreaMasSuedoBase() <= 6000) {
-            montoDescuento = montoAreaMasSuedoBase() * 0.46;
+            montoDescuento = montoAreaMasSuedoBase() * 0.04;
         }
 
         if (montoAreaMasSuedoBase() >= 6001) {
