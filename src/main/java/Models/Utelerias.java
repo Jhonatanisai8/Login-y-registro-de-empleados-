@@ -84,7 +84,7 @@ public class Utelerias {
     }
 
     //METODO PARA VER LOS REGISTROS EN UN JTABLE
-    public  void cargarTable(DefaultTableModel modelo, JTable tblDatos) {
+    public void cargarTable(DefaultTableModel modelo, JTable tblDatos) {
 
         String sql = "SELECT empleados.id, empleados.nombre, empleados.appPaterno, empleados.appMaterno, empleados.sueldoBase, area.nombre, empleados.estadoCivil, empleados.sueldoTotal FROM empleados INNER JOIN area ON area.id = empleados.idArea";
         try {
@@ -110,5 +110,20 @@ public class Utelerias {
         } catch (SQLException e) {
             System.out.println("Error al mostrar tabla: " + e.toString());
         }
+    }
+
+    //METODO PARA LIMPIAR LOS CAMPOS EN EL FORMULARIO DE  REGOSTRO DE PERSONAS
+    public static void limpiarCamposFormularioRegistrarUsuario(JTextField txtNombre, JTextField txtAppPaterno, JTextField txtappMaterno,
+            JTextField txtSueldoBase, JTextField txtNumHijos, JComboBox cbxArea, JComboBox cbxEstadoCivil) {
+        String nulo = "";
+        txtNombre.setText(nulo);
+        txtAppPaterno.setText(nulo);
+        txtNumHijos.setText(nulo);
+        txtSueldoBase.setText(nulo);
+        txtappMaterno.setText(nulo);
+        cbxArea.setSelectedIndex(0);
+        cbxEstadoCivil.setSelectedIndex(0);
+        //para el cursor
+        txtNombre.requestFocus();
     }
 }
