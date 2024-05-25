@@ -88,12 +88,19 @@ public class Utelerias {
     }
 
     //METODO PARA VER LOS REGISTROS EN UN JTABLE
-    public void cargarTable(DefaultTableModel modelo, JTable tblDatos) {
+    public void cargarTable(DefaultTableModel modelo, JTable tblDatos, int indice) {
 
         String sql = "SELECT empleados.id, empleados.nombre, empleados.appPaterno, empleados.appMaterno, empleados.sueldoBase, area.nombre, empleados.estadoCivil, empleados.sueldoTotal FROM empleados INNER JOIN area ON area.id = empleados.idArea";
+        String sqlTotal = "SELECT empleados.id, empleados.nombre, empleados.appPaterno, empleados.appMaterno,TRUNCATE( empleados.sueldoBase,2), area.nombre, empleados.sexo, empleados.estadoCivil,empleados.numHijos, TRUNCATE(empleados.bonoArea,2), TRUNCATE((empleados.montoDescuento + empleados.montoImpuesto),2), TRUNCATE(empleados.sueldoTotal,2) FROM empleados INNER JOIN area ON area.id = empleados.idArea";
+
+        PreparedStatement consultaPreparada = null;
         try {
             Connection conectar = conexion.conectarBD();
-            PreparedStatement consultaPreparada = conectar.prepareStatement(sql);
+            if (indice == 0) {
+                consultaPreparada = conectar.prepareStatement(sql);
+            } else {
+                consultaPreparada = conectar.prepareStatement(sqlTotal);
+            }
             ResultSet resultado = consultaPreparada.executeQuery();
 
             //obtenemos los datos de la tabla en la base de datos
