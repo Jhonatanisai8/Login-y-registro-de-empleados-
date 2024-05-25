@@ -1,5 +1,7 @@
 package Vistas;
 
+import DaoImplementacion.EmpleadoDaoImple;
+import Models.Empleado;
 import Models.Utelerias;
 import java.awt.Color;
 
@@ -8,16 +10,21 @@ import java.awt.Color;
  * @author Jhonatan
  */
 public class RegistroUsuario extends javax.swing.JPanel {
-
+    
     Utelerias utelerias = new Utelerias();
 
+    //objetos de la clase empleadoDao y empleadoDaoImple
+    EmpleadoDaoImple empleadoDaoImple = new EmpleadoDaoImple();
+    Empleado empleado;
+    
     public RegistroUsuario() {
         initComponents();
         this.estilosCampos();
         //llamamos al metodo en el contructor de este formulario
         utelerias.rellenarCombo("area", "nombre", cbxArea);
+        activarCamposHijos("Casado");
     }
-
+    
     void estilosCampos() {
         txtNombre.putClientProperty("JTextField.placeholderText", "Ingrese el nombre");
         txtApellidoMaterno.putClientProperty("JTextField.placeholderText", "Ingrese el Apellido Materno");
@@ -25,7 +32,7 @@ public class RegistroUsuario extends javax.swing.JPanel {
         txtSueldoBase.putClientProperty("JTextField.placeholderText", "Ingrese el sueldo base");
         txtNumHijos.putClientProperty("JTextField.placeholderText", "Cant. Hijos");
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -47,7 +54,7 @@ public class RegistroUsuario extends javax.swing.JPanel {
         jCheckBox2 = new javax.swing.JCheckBox();
         jLabel8 = new javax.swing.JLabel();
         txtNumHijos = new javax.swing.JTextField();
-        jLabel9 = new javax.swing.JLabel();
+        lblHijos = new javax.swing.JLabel();
         RegistrarBtn = new javax.swing.JPanel();
         btnRegistrar = new javax.swing.JLabel();
         cbxArea = new javax.swing.JComboBox<>();
@@ -89,6 +96,11 @@ public class RegistroUsuario extends javax.swing.JPanel {
         jLabel7.setText("Estado Civil:");
 
         cbxEstadoCivil.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "=Seleccionar=", "Casado", "Soltero" }));
+        cbxEstadoCivil.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxEstadoCivilActionPerformed(evt);
+            }
+        });
 
         jCheckBox1.setText("Masculino");
         jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
@@ -104,8 +116,8 @@ public class RegistroUsuario extends javax.swing.JPanel {
 
         txtNumHijos.setFont(new java.awt.Font("SimHei", 0, 15)); // NOI18N
 
-        jLabel9.setFont(new java.awt.Font("Comic Sans MS", 0, 15)); // NOI18N
-        jLabel9.setText("Nº de Hijos:");
+        lblHijos.setFont(new java.awt.Font("Comic Sans MS", 0, 15)); // NOI18N
+        lblHijos.setText("Nº de Hijos:");
 
         RegistrarBtn.setBackground(new java.awt.Color(0, 52, 91));
         RegistrarBtn.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -123,6 +135,11 @@ public class RegistroUsuario extends javax.swing.JPanel {
         btnRegistrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/GUARDAR (2).png"))); // NOI18N
         btnRegistrar.setText("REGISTRAR");
         btnRegistrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnRegistrar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnRegistrarMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout RegistrarBtnLayout = new javax.swing.GroupLayout(RegistrarBtn);
         RegistrarBtn.setLayout(RegistrarBtnLayout);
@@ -187,7 +204,7 @@ public class RegistroUsuario extends javax.swing.JPanel {
                                 .addGap(18, 18, 18)
                                 .addComponent(cbxEstadoCivil, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(lblHijos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txtNumHijos)
                                 .addGap(51, 51, 51))))
@@ -258,7 +275,7 @@ public class RegistroUsuario extends javax.swing.JPanel {
                             .addComponent(cbxEstadoCivil, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(37, 37, 37)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblHijos, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtNumHijos, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(RegistrarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -286,6 +303,23 @@ public class RegistroUsuario extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_cbxAreaActionPerformed
 
+    private void btnRegistrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegistrarMouseClicked
+       
+    }//GEN-LAST:event_btnRegistrarMouseClicked
+
+    private void cbxEstadoCivilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxEstadoCivilActionPerformed
+        activarCamposHijos(cbxEstadoCivil.getSelectedItem().toString());
+    }//GEN-LAST:event_cbxEstadoCivilActionPerformed
+    
+    public void activarCamposHijos(String valor) {
+        if (valor.equalsIgnoreCase("Casado") || valor.equalsIgnoreCase("Casada")) {
+            txtNumHijos.setVisible(true);
+            lblHijos.setVisible(true);
+        } else {
+            txtNumHijos.setVisible(false);
+            lblHijos.setVisible(false);
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel RegistrarBtn;
@@ -302,8 +336,8 @@ public class RegistroUsuario extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JLabel lblHijos;
     private javax.swing.JTextField txtApellidoMaterno;
     private javax.swing.JTextField txtApellidoPaterno;
     private javax.swing.JTextField txtNombre;
