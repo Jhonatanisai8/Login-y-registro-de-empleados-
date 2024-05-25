@@ -3,8 +3,12 @@ package Vistas;
 import Formularios.frmHola;
 import Models.Utelerias;
 import java.awt.Color;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
+import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 
 /**
  *
@@ -16,6 +20,10 @@ public class ReporteUsuarios extends javax.swing.JPanel {
     DefaultTableModel modelo = new DefaultTableModel(cabezera, 0);
 
     Utelerias utelerias = new Utelerias();
+
+    //variables para buscar por nombre
+    private TableRowSorter trsFiltro;
+    String filtro;
 
     public ReporteUsuarios() {
         initComponents();
@@ -181,6 +189,17 @@ public class ReporteUsuarios extends javax.swing.JPanel {
                 .addComponent(btnBuscar))
         );
 
+        txtBuscar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtBuscarMouseClicked(evt);
+            }
+        });
+        txtBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtBuscarKeyTyped(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -274,7 +293,43 @@ public class ReporteUsuarios extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnBuscarMouseClicked
 
+    private void txtBuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtBuscarMouseClicked
+        buscar();
+    }//GEN-LAST:event_txtBuscarMouseClicked
 
+    private void txtBuscarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyTyped
+        trsFiltro = new TableRowSorter(btlDatos.getModel());
+        btlDatos.setRowSorter(trsFiltro);
+    }//GEN-LAST:event_txtBuscarKeyTyped
+
+    public void filtroNombre() {
+        if (txtBuscar == null) {
+        } else {
+            try {
+                filtro = txtBuscar.getText();
+                //va a buscar en la colunna 1 y buscar lo que esta almacenado en la caja de texto
+                trsFiltro.setRowFilter(RowFilter.regexFilter(filtro, 1));
+            } catch (Exception e) {
+                System.out.println("Error al buscar: " + e.toString());
+            }
+        }
+    }
+
+    private void buscar() {
+        txtBuscar.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyReleased(final KeyEvent e) {
+                String cadena = txtBuscar.getText();
+                txtBuscar.setText(cadena);
+                repaint();
+
+                // Verificar si trsFiltro está inicializado antes de llamar a filtro()
+                if (trsFiltro != null) {
+                    filtroNombre();
+                }
+            }
+        });
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel BuscarBtn;
     private javax.swing.JPanel EliminarBtn;
