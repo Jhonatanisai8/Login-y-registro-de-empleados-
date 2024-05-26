@@ -169,4 +169,38 @@ public class EmpleadoDaoImple implements EmpleadoDao {
         return 0;
     }
 
+    @Override
+    public Empleado obtenerInformacion(int idEmpleado) {
+        Empleado empleado = new Empleado();
+        try {
+
+            Connection conectar = conexion.conectarBD();
+            String sql = "SELECT empleados.id, empleados.nombre, empleados.appPaterno, empleados.appMaterno, "
+                    + "TRUNCATE(empleados.sueldoBase, 2) AS sueldoBase, area.nombre AS areaNombre, empleados.sexo, "
+                    + "empleados.estadoCivil, empleados.numHijos "
+                    + "FROM empleados INNER JOIN area ON area.id = empleados.idArea "
+                    + "WHERE empleados.id = ?";
+            PreparedStatement consultaPreparada = conectar.prepareStatement(sql);
+            consultaPreparada.setInt(1, idEmpleado);  // Establecer el parámetro antes de ejecutar
+            ResultSet resultado = consultaPreparada.executeQuery();
+
+            while (resultado.next()) {
+                empleado.setId(resultado.getInt("id"));
+                empleado.setNombre(resultado.getString("nombre"));
+                empleado.setAppPaterno(resultado.getString("appPaterno"));
+                empleado.setAppMaterno(resultado.getString("appMaterno"));
+                empleado.setSueldoBase(resultado.getDouble("sueldoBase"));
+                empleado.setArea(resultado.getString("areaNombre"));
+                empleado.setSexo(resultado.getString("sexo"));
+                empleado.setEstadoCivil(resultado.getString("estadoCivil"));
+                empleado.setNumHijos(resultado.getInt("numHijos"));
+            }
+
+            conexion.desconectaBD();
+        } catch (SQLException e) {
+            System.out.println("Error al listar" + e.toString());
+        }
+        return empleado;
+    }
+
 }
