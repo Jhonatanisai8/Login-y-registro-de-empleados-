@@ -12,6 +12,11 @@ package Vistas;
 
 import Models.Utelerias;
 import javax.swing.table.DefaultTableModel;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.category.DefaultCategoryDataset;
 
 /**
  *
@@ -19,16 +24,41 @@ import javax.swing.table.DefaultTableModel;
  */
 public class TablasPequeñas extends javax.swing.JPanel {
 
-    /**
-     * Creates new form TablasPequeñas
-     */
+    //variables para los graficos
+    JFreeChart grafico;
+    DefaultCategoryDataset datos = new DefaultCategoryDataset();
+
     Utelerias utelerias = new Utelerias();
     String[] cabezera = {"Nº Empleadps", "Cantidad"};
     DefaultTableModel modelo = new DefaultTableModel(cabezera, 0);
 
     public TablasPequeñas() {
         initComponents();
-        utelerias.cargarTable(modelo, jTable1, 2);
+        utelerias.cargarTable(modelo, tblDatos, 2);
+        graficarDatos();
+    }
+
+    private void graficarDatos() {
+        try {
+            //recorremos cada fila
+            for (int i = 0; i < tblDatos.getRowCount(); i++) {
+                datos.addValue(Integer.parseInt(tblDatos.getValueAt(i, 0).toString()), tblDatos.getValueAt(i, 1).toString(), tblDatos.getValueAt(i, 1).toString());
+            }
+
+            //mostramos los graficos
+            grafico = ChartFactory.createBarChart("Grafico de cantidad de empleados por Área",
+                    "Área", "Cantidad", datos, PlotOrientation.VERTICAL,
+                    true, true,
+                    false);
+            ChartPanel panel = new ChartPanel(grafico);
+            this.add(panel);
+            panel.setBounds(300, 40, 450, 250);
+
+        } catch (NumberFormatException e) {
+            System.out.println("""
+                               Error al graficar :
+                                """ + e.getMessage());
+        }
     }
 
     /**
@@ -41,9 +71,9 @@ public class TablasPequeñas extends javax.swing.JPanel {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblDatos = new javax.swing.JTable();
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblDatos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -51,7 +81,7 @@ public class TablasPequeñas extends javax.swing.JPanel {
                 "Nº de empleados", "Área"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tblDatos);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -66,14 +96,14 @@ public class TablasPequeñas extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(15, 15, 15)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(259, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(316, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tblDatos;
     // End of variables declaration//GEN-END:variables
 }
