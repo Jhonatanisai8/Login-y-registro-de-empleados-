@@ -94,18 +94,27 @@ public class Utelerias {
 
         String sql3 = "SELECT COUNT(empleados.idArea), area.nombre from empleados inner join area on area.id = empleados.idArea GROUP by (area.nombre)";
         String sqlSexo = "SELECT COUNT(sexo), sexo FROM empleados GROUP BY (sexo)";
+        String sqlBonos = "SELECT sum(empleados.bonoArea), area.nombre from empleados inner join area on area.id = empleados.idArea GROUP by (area.nombre)";
         PreparedStatement consultaPreparada = null;
 
         try {
             Connection conectar = conexion.conectarBD();
-            if (indice == 0) {
-                consultaPreparada = conectar.prepareStatement(sql);
-            } else if (indice == 1) {
-                consultaPreparada = conectar.prepareStatement(sqlTotal);
-            } else if (indice == 2) {
-                consultaPreparada = conectar.prepareStatement(sql3);
-            } else {
-                consultaPreparada = conectar.prepareStatement(sqlSexo);
+            switch (indice) {
+                case 0:
+                    consultaPreparada = conectar.prepareStatement(sql);
+                    break;
+                case 1:
+                    consultaPreparada = conectar.prepareStatement(sqlTotal);
+                    break;
+                case 2:
+                    consultaPreparada = conectar.prepareStatement(sql3);
+                    break;
+                case 3:
+                    consultaPreparada = conectar.prepareStatement(sqlSexo);
+                    break;
+                case 4:
+                    consultaPreparada = conectar.prepareStatement(sqlBonos);
+                    break;
             }
             ResultSet resultado = consultaPreparada.executeQuery();
 
