@@ -26,6 +26,10 @@ public class Empleado {
         this.id = id;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
     //constuctor que nos va a ayudara modificar
     public Empleado(String nombre, String appPaterno, String appMaterno, double sueldoBase, String area, String sexo, String estadoCivil, int numHijos) {
         this.nombre = nombre;
