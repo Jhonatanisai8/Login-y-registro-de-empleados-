@@ -17,26 +17,26 @@ import javax.swing.table.TableRowSorter;
  * @author Jhonatan
  */
 public class ReporteUsuarios extends javax.swing.JPanel {
-    
+
     String cabezera[] = {"ID", "NOMBRES", "APELLIDO PATERNO", "APELLIDO MATERNO", "SUELDO BASE", "ÁREA", "ESTADO CIVIL", "SUELDO TOTAL"};
     DefaultTableModel modelo = new DefaultTableModel(cabezera, 0);
-    
+
     Utelerias utelerias = new Utelerias();
 
     //variables para buscar por nombre
     private TableRowSorter trsFiltro;
     String filtro;
-    
+
     public ReporteUsuarios() {
         initComponents();
         this.estilos();
         utelerias.cargarTable(modelo, btlDatos, 0);
     }
-    
+
     void estilos() {
         txtBuscar.putClientProperty("JTextField.placeholderText", "Ingrese el nombre a buscar");
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -325,6 +325,11 @@ public class ReporteUsuarios extends javax.swing.JPanel {
     }//GEN-LAST:event_btnModificarMouseClicked
 
     private void btnEliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEliminarMouseClicked
+
+        borrarVariosEmpleados();
+    }//GEN-LAST:event_btnEliminarMouseClicked
+
+    private void borarUnSoloEmpleado() {
         int fila;
         int idEmpleado;
         //metodo para selecionar la fila
@@ -340,8 +345,41 @@ public class ReporteUsuarios extends javax.swing.JPanel {
             modelo.removeRow(fila);
             JOptionPane.showMessageDialog(null, "Cliente con id: " + idEmpleado + " Eliminado", "ATENCIÓN", JOptionPane.WARNING_MESSAGE);
         }
-    }//GEN-LAST:event_btnEliminarMouseClicked
-    
+    }
+
+    private void borrarVariosEmpleados() {
+        int[] filasSeleccionadas = btlDatos.getSelectedRows();
+        if (filasSeleccionadas.length == 0) {
+            JOptionPane.showMessageDialog(null, "Por favor seleccione al menos una fila", "WARNING", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        EmpleadoDaoImple usuarioDao = new EmpleadoDaoImple();
+        DefaultTableModel modelo = (DefaultTableModel) btlDatos.getModel();
+
+        String ids = "";
+        for (int i = 0; i < filasSeleccionadas.length; i++) {
+            int idUsuario = (int) btlDatos.getValueAt(filasSeleccionadas[i], 0);
+            if (!ids.isEmpty()) {
+                ids += ", ";
+            }
+            //vamos agregando
+            ids += "" + idUsuario;
+        }
+
+        int opcion = JOptionPane.showConfirmDialog(null, "¿Estás seguro(a) de eliminar los registros con ID: " + ids
+                + "\nDel registro?", "ELIMINANDO REGISTROS", JOptionPane.WARNING_MESSAGE);
+        if (opcion == 0) {
+            for (int i = filasSeleccionadas.length - 1; i >= 0; i--) {
+                int idEmpleado = (int) btlDatos.getValueAt(filasSeleccionadas[i], 0);
+                Empleado empleado = new Empleado(idEmpleado);
+                usuarioDao.eliminarEmpleado(empleado);
+                modelo.removeRow(filasSeleccionadas[i]);
+            }
+            JOptionPane.showMessageDialog(null, "Registros eliminados", "ELIMINANDO REGISTROS", JOptionPane.WARNING_MESSAGE);
+        }
+    }
+
     public void filtroNombre() {
         if (txtBuscar == null) {
         } else {
@@ -354,7 +392,7 @@ public class ReporteUsuarios extends javax.swing.JPanel {
             }
         }
     }
-    
+
     private void buscar() {
         txtBuscar.addKeyListener(new KeyAdapter() {
             @Override
