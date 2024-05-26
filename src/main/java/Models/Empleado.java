@@ -30,7 +30,7 @@ public class Empleado {
         this.id = id;
     }
 
-    //constuctor que nos va a ayudara modificar
+    //constuctor que nos va a ayudara insertar
     public Empleado(String nombre, String appPaterno, String appMaterno, double sueldoBase, String area, String sexo, String estadoCivil, int numHijos) {
         this.nombre = nombre;
         this.appPaterno = appPaterno;
@@ -42,7 +42,7 @@ public class Empleado {
         this.numHijos = numHijos;
     }
 
-    //constructor que nos va ayudara eliminar
+    //constructor que nos va ayudara modificar
     public Empleado(int id, String nombre, String appPaterno, String appMaterno, double sueldoBase, String area, String sexo, String estadoCivil, int numHijos) {
         this.id = id;
         this.nombre = nombre;

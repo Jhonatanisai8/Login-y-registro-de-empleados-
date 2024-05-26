@@ -16,19 +16,10 @@ public class RegistroUsuario extends javax.swing.JPanel {
 
     //objetos de la clase empleadoDao y empleadoDaoImple
     EmpleadoDaoImple empleadoDaoImple = new EmpleadoDaoImple();
-    Empleado empleado;
 
     //variables para poder modicar un usuario
-    boolean estaEditado = false;
+    boolean isEdition = false;
     Empleado empleadoEditado;
-
-    //constructor para poder modificar los datos de un usuario
-    public RegistroUsuario(Empleado empleado1) {
-        initComponents();
-        estaEditado = true;
-        empleadoEditado = empleado1;
-        estilosCampos();
-    }
 
     public RegistroUsuario() {
         initComponents();
@@ -40,16 +31,51 @@ public class RegistroUsuario extends javax.swing.JPanel {
         botones.add(bHombre);
     }
 
-    void estilosCampos() {
+    //constructor para poder modificar los datos de un usuario
+    public RegistroUsuario(Empleado empleado1) {
+        initComponents();
+        isEdition = true;
+        empleadoEditado = empleado1;
+        estilosCampos();
+        //llamamos al metodo en el contructor de este formulario
+        utelerias.rellenarCombo("area", "nombre", cbxArea);
+        activarCamposHijos("Casado");
+        botones.add(bMujer);
+        botones.add(bHombre);
+    }
+
+    private void estilosCampos() {
         txtNombre.putClientProperty("JTextField.placeholderText", "Ingrese el nombre");
         txtApellidoMaterno.putClientProperty("JTextField.placeholderText", "Ingrese el Apellido Materno");
         txtApellidoPaterno.putClientProperty("JTextField.placeholderText", "Ingrese el Apellido Paterno");
         txtSueldoBase.putClientProperty("JTextField.placeholderText", "Ingrese el sueldo base");
         txtNumHijos.putClientProperty("JTextField.placeholderText", "Cant. Hijos");
+
+        //comenzamos
+        if (isEdition) {
+            lblTitulo.setText("Información del empleado");
+            btnRegistrar.setText("Guardar");
+            if (empleadoEditado != null) {
+                txtNombre.setText(empleadoEditado.getNombre());
+                txtApellidoPaterno.setText(empleadoEditado.getAppPaterno());
+                txtApellidoMaterno.setText(empleadoEditado.getAppMaterno());
+                txtSueldoBase.setText(empleadoEditado.getSueldoBase() + "");
+                cbxArea.setSelectedItem(empleadoEditado.getArea());
+                //para el sexo del empleado
+                if (empleadoEditado.getSexo().equalsIgnoreCase("Masculino")) {
+                    bHombre.setSelected(true);
+                } else {
+                    bMujer.setSelected(true);
+                }
+                cbxEstadoCivil.setSelectedItem(empleadoEditado.getEstadoCivil());
+                txtNumHijos.setText(empleadoEditado.getNumHijos() + "");
+            }
+        }
     }
 
     public void registrarEmpleado() {
         //metodo para insertar
+        Empleado empleado;
         String campos = Utelerias.validarCamposFormularioRegistrarUsuario(txtNombre, txtApellidoPaterno, txtApellidoMaterno, txtSueldoBase, txtNumHijos, botones);
         if (campos.equals("")) {
             int id;
@@ -82,13 +108,11 @@ public class RegistroUsuario extends javax.swing.JPanel {
                     empleado = new Empleado(nombre, appPaterno, appMaterno, sueldoBase, area, sexo, estadoCivil, numHijos);
                     empleadoDaoImple.insertarEmpleado(empleado);
                     JOptionPane.showMessageDialog(null, "Empleado con nombre " + nombre + " registrado", "ATENCIÓN", JOptionPane.INFORMATION_MESSAGE);
-                    Utelerias.limpiarCamposFormularioRegistrarUsuario(txtNombre, txtApellidoPaterno, txtApellidoMaterno, txtSueldoBase, txtNumHijos, cbxArea, cbxEstadoCivil);
                 }
             } else {
                 empleado = new Empleado(nombre, appPaterno, appMaterno, sueldoBase, area, sexo, estadoCivil, 0);
                 empleadoDaoImple.insertarEmpleado(empleado);
                 JOptionPane.showMessageDialog(null, "Empleado con nombre " + nombre + " registrado", "ATENCIÓN", JOptionPane.INFORMATION_MESSAGE);
-                Utelerias.limpiarCamposFormularioRegistrarUsuario(txtNombre, txtApellidoPaterno, txtApellidoMaterno, txtSueldoBase, txtNumHijos, cbxArea, cbxEstadoCivil);
             }
         } else {
             JOptionPane.showMessageDialog(null, "Verificar en " + campos, "ATENCIÓN", JOptionPane.WARNING_MESSAGE);
@@ -100,7 +124,7 @@ public class RegistroUsuario extends javax.swing.JPanel {
     private void initComponents() {
 
         botones = new javax.swing.ButtonGroup();
-        jLabel1 = new javax.swing.JLabel();
+        lblTitulo = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         txtNombre = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
@@ -122,8 +146,8 @@ public class RegistroUsuario extends javax.swing.JPanel {
         bHombre = new javax.swing.JRadioButton();
         bMujer = new javax.swing.JRadioButton();
 
-        jLabel1.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 0, 20)); // NOI18N
-        jLabel1.setText("Registro de un nuevo Empleado:");
+        lblTitulo.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 0, 20)); // NOI18N
+        lblTitulo.setText("Registro de un nuevo Empleado:");
 
         jLabel2.setFont(new java.awt.Font("Comic Sans MS", 0, 15)); // NOI18N
         jLabel2.setText("Nombre:");
@@ -226,7 +250,7 @@ public class RegistroUsuario extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 412, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 412, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -300,7 +324,7 @@ public class RegistroUsuario extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -393,7 +417,6 @@ public class RegistroUsuario extends javax.swing.JPanel {
     private javax.swing.JLabel btnRegistrar;
     private javax.swing.JComboBox<String> cbxArea;
     private javax.swing.JComboBox<String> cbxEstadoCivil;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -403,6 +426,7 @@ public class RegistroUsuario extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel lblHijos;
+    private javax.swing.JLabel lblTitulo;
     private javax.swing.JTextField txtApellidoMaterno;
     private javax.swing.JTextField txtApellidoPaterno;
     private javax.swing.JTextField txtNombre;
