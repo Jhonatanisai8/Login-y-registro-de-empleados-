@@ -2,6 +2,7 @@ package Vistas;
 
 import DaoImplementacion.EmpleadoDaoImple;
 import Formularios.frmHola;
+import Models.Empleado;
 import Models.Utelerias;
 import java.awt.Color;
 import java.awt.event.KeyAdapter;
@@ -16,26 +17,26 @@ import javax.swing.table.TableRowSorter;
  * @author Jhonatan
  */
 public class ReporteUsuarios extends javax.swing.JPanel {
-
+    
     String cabezera[] = {"ID", "NOMBRES", "APELLIDO PATERNO", "APELLIDO MATERNO", "SUELDO BASE", "ÁREA", "ESTADO CIVIL", "SUELDO TOTAL"};
     DefaultTableModel modelo = new DefaultTableModel(cabezera, 0);
-
+    
     Utelerias utelerias = new Utelerias();
 
     //variables para buscar por nombre
     private TableRowSorter trsFiltro;
     String filtro;
-
+    
     public ReporteUsuarios() {
         initComponents();
         this.estilos();
         utelerias.cargarTable(modelo, btlDatos, 0);
     }
-
+    
     void estilos() {
         txtBuscar.putClientProperty("JTextField.placeholderText", "Ingrese el nombre a buscar");
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -76,6 +77,9 @@ public class ReporteUsuarios extends javax.swing.JPanel {
         btnEliminar.setText("Eliminar");
         btnEliminar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnEliminar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnEliminarMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnEliminarMouseEntered(evt);
             }
@@ -320,6 +324,23 @@ public class ReporteUsuarios extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnModificarMouseClicked
 
+    private void btnEliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEliminarMouseClicked
+        int fila;
+        int idEmpleado;
+        //metodo para selecionar la fila
+        fila = btlDatos.getSelectedRow();
+        if (fila < 0) {
+            JOptionPane.showMessageDialog(null, "Por favor seleciona el empleado a eliminar", "ATENCIÓN", JOptionPane.WARNING_MESSAGE);
+        } else {
+            idEmpleado = (int) btlDatos.getValueAt(fila, 0);
+            EmpleadoDaoImple empleadoDaoImple = new EmpleadoDaoImple();
+            //llamamos al constructor que nos permite eliminar un empleado
+            Empleado empleado = new Empleado(idEmpleado);
+            empleadoDaoImple.eliminarEmpleado(empleado);
+            JOptionPane.showMessageDialog(null, "Cliente con id: " + idEmpleado + " Eliminado", "ATENCIÓN", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_btnEliminarMouseClicked
+    
     public void filtroNombre() {
         if (txtBuscar == null) {
         } else {
@@ -332,7 +353,7 @@ public class ReporteUsuarios extends javax.swing.JPanel {
             }
         }
     }
-
+    
     private void buscar() {
         txtBuscar.addKeyListener(new KeyAdapter() {
             @Override
