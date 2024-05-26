@@ -11,12 +11,16 @@ GROUP by (area.nombre);
 package Vistas;
 
 import Models.Utelerias;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
 import javax.swing.table.DefaultTableModel;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.data.general.DefaultKeyedValuesDataset;
+import org.jfree.data.general.DefaultPieDataset;
 
 /**
  *
@@ -31,11 +35,15 @@ public class TablasPequeñas extends javax.swing.JPanel {
     Utelerias utelerias = new Utelerias();
     String[] cabezera = {"Nº Empleadps", "Cantidad"};
     DefaultTableModel modelo = new DefaultTableModel(cabezera, 0);
+    String[] cabezera2 = {"Nº Empleadps", "Sexo"};
+    DefaultTableModel modelo2 = new DefaultTableModel(cabezera, 0);
 
     public TablasPequeñas() {
         initComponents();
         utelerias.cargarTable(modelo, tblDatos, 2);
+        utelerias.cargarTable(modelo2, btlDatos2, 3);
         graficarDatos();
+        graficoSexo();
     }
 
     private void graficarDatos() {
@@ -51,13 +59,43 @@ public class TablasPequeñas extends javax.swing.JPanel {
                     true, true,
                     false);
             ChartPanel panel = new ChartPanel(grafico);
-            this.add(panel);
-            panel.setBounds(300, 40, 450, 250);
+            //contenido.add(panel);
+            //panel.setBounds(300, 40, 400, 200);
+            panel.setMouseWheelEnabled(true);
+            panel.setPreferredSize(new Dimension(400, 200));
 
+            contenido.setLayout(new BorderLayout());
+            contenido.add(panel, BorderLayout.NORTH);
         } catch (NumberFormatException e) {
             System.out.println("""
                                Error al graficar :
                                 """ + e.getMessage());
+        }
+    }
+
+    public void graficoSexo() {
+        try {
+            //variables para los graficos
+            JFreeChart grafico;
+            //variables para el grafico
+            DefaultPieDataset datos;
+            datos = new DefaultKeyedValuesDataset();
+
+            for (int i = 0; i < btlDatos2.getRowCount(); i++) {
+                datos.setValue(btlDatos2.getValueAt(i, 1).toString(), Integer.parseInt(btlDatos2.getValueAt(i, 0).toString()));
+            }
+            
+            grafico = ChartFactory.createPieChart("Cantidad de empleados segun su sexo", datos, true, true, false);
+
+            //creamos un panel
+            ChartPanel panel = new ChartPanel(grafico);
+            panel.setMouseWheelEnabled(true);
+            panel.setPreferredSize(new Dimension(400, 200));
+
+            contenido2.setLayout(new BorderLayout());
+            contenido2.add(panel, BorderLayout.NORTH);
+        } catch (NumberFormatException e) {
+            System.out.println("Error al graficar la tabla sexo: " + e.toString());
         }
     }
 
@@ -70,8 +108,12 @@ public class TablasPequeñas extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        contenido = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblDatos = new javax.swing.JTable();
+        contenido2 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        btlDatos2 = new javax.swing.JTable();
 
         tblDatos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -83,27 +125,79 @@ public class TablasPequeñas extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(tblDatos);
 
+        javax.swing.GroupLayout contenidoLayout = new javax.swing.GroupLayout(contenido);
+        contenido.setLayout(contenidoLayout);
+        contenidoLayout.setHorizontalGroup(
+            contenidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(contenidoLayout.createSequentialGroup()
+                .addGap(100, 100, 100)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(155, Short.MAX_VALUE))
+        );
+        contenidoLayout.setVerticalGroup(
+            contenidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(contenidoLayout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(49, Short.MAX_VALUE))
+        );
+
+        btlDatos2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Nº de empleados", "Sexo"
+            }
+        ));
+        jScrollPane2.setViewportView(btlDatos2);
+
+        javax.swing.GroupLayout contenido2Layout = new javax.swing.GroupLayout(contenido2);
+        contenido2.setLayout(contenido2Layout);
+        contenido2Layout.setHorizontalGroup(
+            contenido2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(contenido2Layout.createSequentialGroup()
+                .addGap(97, 97, 97)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        contenido2Layout.setVerticalGroup(
+            contenido2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(contenido2Layout.createSequentialGroup()
+                .addGap(27, 27, 27)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(108, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(636, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(contenido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(contenido2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(393, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(316, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(contenido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(contenido2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(14, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable btlDatos2;
+    private javax.swing.JPanel contenido;
+    private javax.swing.JPanel contenido2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable tblDatos;
     // End of variables declaration//GEN-END:variables
 }
