@@ -18,6 +18,18 @@ public class RegistroUsuario extends javax.swing.JPanel {
     EmpleadoDaoImple empleadoDaoImple = new EmpleadoDaoImple();
     Empleado empleado;
 
+    //variables para poder modicar un usuario
+    boolean estaEditado = false;
+    Empleado empleadoEditado;
+
+    //constructor para poder modificar los datos de un usuario
+    public RegistroUsuario(Empleado empleado1) {
+        initComponents();
+        estaEditado = true;
+        empleadoEditado = empleado1;
+        estilosCampos();
+    }
+
     public RegistroUsuario() {
         initComponents();
         this.estilosCampos();
