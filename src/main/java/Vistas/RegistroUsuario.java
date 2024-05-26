@@ -105,14 +105,40 @@ public class RegistroUsuario extends javax.swing.JPanel {
                     JOptionPane.showMessageDialog(null, "Esta Vacia y/o no se puede ser Negativo", sexo, HEIGHT);
                 } else {
                     numHijos = Integer.parseInt(txtNumHijos.getText());
-                    empleado = new Empleado(nombre, appPaterno, appMaterno, sueldoBase, area, sexo, estadoCivil, numHijos);
-                    empleadoDaoImple.insertarEmpleado(empleado);
-                    JOptionPane.showMessageDialog(null, "Empleado con nombre " + nombre + " registrado", "ATENCIÓN", JOptionPane.INFORMATION_MESSAGE);
+                    if (isEdition) {
+                        empleado = empleadoEditado;
+                    } else {
+                        empleado = new Empleado(nombre, appPaterno, appMaterno, sueldoBase, area, sexo, estadoCivil, numHijos);
+                    }
+                    if (!isEdition) {
+                        empleadoDaoImple.insertarEmpleado(empleado);
+                        JOptionPane.showMessageDialog(null, "Empleado con nombre " + nombre + " registrado", "ATENCIÓN", JOptionPane.INFORMATION_MESSAGE);
+                        Utelerias.limpiarCamposFormularioRegistrarUsuario(txtNombre, txtApellidoPaterno, txtApellidoMaterno, txtSueldoBase, txtNumHijos, cbxArea, cbxEstadoCivil);
+                    } else {
+                        id = empleado.getId();
+                        empleado = new Empleado(id, nombre, appPaterno, appMaterno, sueldoBase, area, sexo, estadoCivil, numHijos);
+                        empleadoDaoImple.modificarDatosEmpleado(empleado);
+                        JOptionPane.showMessageDialog(null, "Empleado con nombre " + nombre + " Modificado", "ATENCIÓN", JOptionPane.INFORMATION_MESSAGE);
+                        Utelerias.limpiarCamposFormularioRegistrarUsuario(txtNombre, txtApellidoPaterno, txtApellidoMaterno, txtSueldoBase, txtNumHijos, cbxArea, cbxEstadoCivil);
+                    }
                 }
             } else {
-                empleado = new Empleado(nombre, appPaterno, appMaterno, sueldoBase, area, sexo, estadoCivil, 0);
-                empleadoDaoImple.insertarEmpleado(empleado);
-                JOptionPane.showMessageDialog(null, "Empleado con nombre " + nombre + " registrado", "ATENCIÓN", JOptionPane.INFORMATION_MESSAGE);
+                if (isEdition) {
+                    empleado = empleadoEditado;
+                } else {
+                    empleado = new Empleado(nombre, appPaterno, appMaterno, sueldoBase, area, sexo, estadoCivil, 0);
+                }
+                if (!isEdition) {
+                    empleadoDaoImple.insertarEmpleado(empleado);
+                    JOptionPane.showMessageDialog(null, "Empleado con nombre " + nombre + " registrado", "ATENCIÓN", JOptionPane.INFORMATION_MESSAGE);
+                    Utelerias.limpiarCamposFormularioRegistrarUsuario(txtNombre, txtApellidoPaterno, txtApellidoMaterno, txtSueldoBase, txtNumHijos, cbxArea, cbxEstadoCivil);
+                } else {
+                    id = empleado.getId();
+                    empleado = new Empleado(id, nombre, appPaterno, appMaterno, sueldoBase, area, sexo, estadoCivil, 0);
+                    empleadoDaoImple.modificarDatosEmpleado(empleado);
+                    JOptionPane.showMessageDialog(null, "Empleado con nombre " + nombre + " Modificado", "ATENCIÓN", JOptionPane.INFORMATION_MESSAGE);
+                    Utelerias.limpiarCamposFormularioRegistrarUsuario(txtNombre, txtApellidoPaterno, txtApellidoMaterno, txtSueldoBase, txtNumHijos, cbxArea, cbxEstadoCivil);
+                }
             }
         } else {
             JOptionPane.showMessageDialog(null, "Verificar en " + campos, "ATENCIÓN", JOptionPane.WARNING_MESSAGE);
