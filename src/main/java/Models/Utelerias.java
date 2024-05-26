@@ -93,15 +93,19 @@ public class Utelerias {
         String sqlTotal = "SELECT empleados.id, empleados.nombre, empleados.appPaterno, empleados.appMaterno,TRUNCATE( empleados.sueldoBase,2), area.nombre, empleados.sexo, empleados.estadoCivil,empleados.numHijos, TRUNCATE(empleados.bonoArea,2), TRUNCATE((empleados.montoDescuento + empleados.montoImpuesto),2), TRUNCATE(empleados.sueldoTotal,2) FROM empleados INNER JOIN area ON area.id = empleados.idArea";
 
         String sql3 = "SELECT COUNT(empleados.idArea), area.nombre from empleados inner join area on area.id = empleados.idArea GROUP by (area.nombre)";
+        String sqlSexo = "SELECT COUNT(sexo), sexo FROM empleados GROUP BY (sexo)";
         PreparedStatement consultaPreparada = null;
+
         try {
             Connection conectar = conexion.conectarBD();
             if (indice == 0) {
                 consultaPreparada = conectar.prepareStatement(sql);
             } else if (indice == 1) {
                 consultaPreparada = conectar.prepareStatement(sqlTotal);
-            } else {
+            } else if (indice == 2) {
                 consultaPreparada = conectar.prepareStatement(sql3);
+            } else {
+                consultaPreparada = conectar.prepareStatement(sqlSexo);
             }
             ResultSet resultado = consultaPreparada.executeQuery();
 
