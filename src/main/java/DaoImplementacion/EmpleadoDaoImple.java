@@ -16,7 +16,7 @@ public class EmpleadoDaoImple implements EmpleadoDao {
 
     //llamos a la clase conexion y al metodo de obtener instancia
     Conexion conexion = Conexion.getInstancia();
-    
+
     @Override
     public List<Empleado> listarEmpleados() {
         //list de empleado
@@ -33,13 +33,13 @@ public class EmpleadoDaoImple implements EmpleadoDao {
         String sexo;
         String estadoCivil;
         int numHijos;
-        
+
         try {
             Connection conectar = conexion.conectarBD();
             String sql = "";
             PreparedStatement consultaPreparada = conectar.prepareStatement(sql);
             ResultSet resultado = consultaPreparada.executeQuery();
-            
+
             while (resultado.next()) {
                 id = resultado.getInt("id");
                 nombre = resultado.getString("nombre");
@@ -57,7 +57,7 @@ public class EmpleadoDaoImple implements EmpleadoDao {
         }
         return empleados;
     }
-    
+
     @Override
     public int insertarEmpleado(Empleado empleado) {
         int registros = 0;
@@ -65,12 +65,12 @@ public class EmpleadoDaoImple implements EmpleadoDao {
             Connection conectar = conexion.conectarBD();
             String sql = "INSERT INTO empleados (nombre,appPaterno,appMaterno,sueldoBase,idArea,sexo,estadoCivil,numHijos, bonoArea,montoDescuento,montoImpuesto,sueldoTotal) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
             PreparedStatement consultaPreparada = conectar.prepareStatement(sql);
-            
+
             consultaPreparada.setString(1, empleado.getNombre());
             consultaPreparada.setString(2, empleado.getAppPaterno());
             consultaPreparada.setString(3, empleado.getAppMaterno());
             consultaPreparada.setDouble(4, empleado.getSueldoBase());
-            
+
             switch (empleado.getArea()) {
                 case "Desarrollo de Software":
                     consultaPreparada.setInt(5, 1);
@@ -94,7 +94,7 @@ public class EmpleadoDaoImple implements EmpleadoDao {
                     consultaPreparada.setInt(5, 7);
                     break;
             }
-            
+
             consultaPreparada.setString(6, empleado.getSexo());
             consultaPreparada.setString(7, empleado.getEstadoCivil());
             consultaPreparada.setInt(8, empleado.getNumHijos());
@@ -102,7 +102,7 @@ public class EmpleadoDaoImple implements EmpleadoDao {
             consultaPreparada.setDouble(10, empleado.montoSeguro());
             consultaPreparada.setDouble(11, empleado.montoImpuesto());
             consultaPreparada.setDouble(12, empleado.montoSueldoTotal());
-            
+
             registros = consultaPreparada.executeUpdate();
             conexion.desconectaBD();
         } catch (SQLException e) {
@@ -110,15 +110,63 @@ public class EmpleadoDaoImple implements EmpleadoDao {
         }
         return registros;
     }
-    
+
     @Override
     public int modificarDatosEmpleado(Empleado empleado) {
-        return 0;
+        int registros = 0;
+        try {
+            Connection conectar = conexion.conectarBD();
+            String sql = "UPDATE empleados SET nombre = ? , appPaterno = ?,appMaterno = ?, sueldoBase = ?,idArea = ?,sexo = ?, numHijos = ?, bonoArea ?, montoDescuento = ?, montoImpuesto = ?, sueldoTotal = ? WHERE id = ?";
+            PreparedStatement consultaPreparada = conectar.prepareStatement(sql);
+            consultaPreparada.setString(1, empleado.getNombre());
+            consultaPreparada.setString(2, empleado.getAppPaterno());
+            consultaPreparada.setString(3, empleado.getAppMaterno());
+            consultaPreparada.setDouble(4, empleado.getSueldoBase());
+
+            switch (empleado.getArea()) {
+                case "Desarrollo de Software":
+                    consultaPreparada.setInt(5, 1);
+                    break;
+                case "Gestión de Proyectos":
+                    consultaPreparada.setInt(5, 2);
+                    break;
+                case "Análisis y Diseño":
+                    consultaPreparada.setInt(5, 3);
+                    break;
+                case "Soporte y Mantenimiento":
+                    consultaPreparada.setInt(5, 4);
+                    break;
+                case "Infraestructura y Operaciones":
+                    consultaPreparada.setInt(5, 5);
+                    break;
+                case "Innovación y Desarrollo de Nuevas Tecnologías":
+                    consultaPreparada.setInt(5, 6);
+                    break;
+                case "ventas y Marketing":
+                    consultaPreparada.setInt(5, 7);
+                    break;
+            }
+
+            consultaPreparada.setString(6, empleado.getSexo());
+            consultaPreparada.setString(7, empleado.getEstadoCivil());
+            consultaPreparada.setInt(8, empleado.getNumHijos());
+            consultaPreparada.setDouble(9, empleado.bonoArea());
+            consultaPreparada.setDouble(10, empleado.montoSeguro());
+            consultaPreparada.setDouble(11, empleado.montoImpuesto());
+            consultaPreparada.setDouble(12, empleado.montoSueldoTotal());
+            consultaPreparada.setInt(13, empleado.getId());
+
+            registros = consultaPreparada.executeUpdate();
+            conexion.desconectaBD();
+        } catch (SQLException e) {
+            System.out.println("Error al modificar: " + e.toString());
+        }
+        return registros;
     }
-    
+
     @Override
     public int eliminarEmpleado(Empleado empleado) {
         return 0;
     }
-    
+
 }
