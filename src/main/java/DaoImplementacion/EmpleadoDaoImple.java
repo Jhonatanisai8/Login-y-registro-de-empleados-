@@ -116,7 +116,21 @@ public class EmpleadoDaoImple implements EmpleadoDao {
         int registros = 0;
         try {
             Connection conectar = conexion.conectarBD();
-            String sql = "UPDATE empleados SET nombre = ? , appPaterno = ?,appMaterno = ?, sueldoBase = ?,idArea = ?,sexo = ?, numHijos = ?, bonoArea ?, montoDescuento = ?, montoImpuesto = ?, sueldoTotal = ? WHERE id = ?";
+            String sql = "UPDATE empleados"
+                    /*1*/ + " SET nombre = ? , "
+                    /*2*/ + "appPaterno = ?,"
+                    /*3*/ + "appMaterno = ?,"
+                    /*4*/ + " sueldoBase = ?,"
+                    /*5*/ + "idArea = ?,"
+                    /*6*/ + "sexo = ?,"
+                    /*7*/ + "estadoCivil = ?, "
+                    /*8*/ + "numHijos = ?,"
+                    /*9*/ + " bonoArea =  ?, "
+                    /*10*/ + "montoDescuento = ?,"
+                    /*11*/ + " montoImpuesto = ?,"
+                    /*12*/ + " sueldoTotal = ? "
+                    /*13*/ + " WHERE id = ?";
+
             PreparedStatement consultaPreparada = conectar.prepareStatement(sql);
             consultaPreparada.setString(1, empleado.getNombre());
             consultaPreparada.setString(2, empleado.getAppPaterno());
