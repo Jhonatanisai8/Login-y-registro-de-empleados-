@@ -180,7 +180,19 @@ public class EmpleadoDaoImple implements EmpleadoDao {
 
     @Override
     public int eliminarEmpleado(Empleado empleado) {
-        return 0;
+        String sql = "DELETE FROM empleados WHERE id = ?";
+        int registros = 0;
+        try {
+            Connection conectar = conexion.conectarBD();
+            PreparedStatement consultaPreparada = conectar.prepareStatement(sql);
+
+            consultaPreparada.setInt(1, empleado.getId());
+            registros = consultaPreparada.executeUpdate();
+            conexion.desconectaBD();
+        } catch (SQLException e) {
+            System.out.println("Error al eliminar: " + e.toString());
+        }
+        return registros;
     }
 
     @Override
