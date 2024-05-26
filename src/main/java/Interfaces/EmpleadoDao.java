@@ -16,4 +16,6 @@ public interface EmpleadoDao {
     public int modificarDatosEmpleado(Empleado empleado);
 
     public int eliminarEmpleado(Empleado empleado);
+
+    public Empleado obtenerInformacion(int idEmpleado);
 }
