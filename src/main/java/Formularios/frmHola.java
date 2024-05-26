@@ -4,6 +4,7 @@ import Vistas.Bienvenida;
 import Vistas.RegistroUsuario;
 import Vistas.ReporteUsuarios;
 import Vistas.ReportesTotales;
+import Vistas.TablasPequeñas;
 import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatMaterialLighterIJTheme;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -17,31 +18,31 @@ import javax.swing.JPanel;
  * @author Jhonatan
  */
 public class frmHola extends javax.swing.JFrame {
-
+    
     public frmHola() {
         initComponents();
         obtenerFecha();
         FlatMaterialLighterIJTheme.setup();
         frmHola.colocalarPanelEnPrincipal(new Bienvenida());
     }
-
+    
     private void obtenerFecha() {
         LocalDate fecha = LocalDate.now();
         Locale spanishLocalDate = new Locale("es", "Es");
         lblFecha.setText(fecha.format(DateTimeFormatter.ofPattern("'Hoy es' EEEE dd 'de' MMMM 'de' yyyy", spanishLocalDate)));
     }
-
+    
     public static void colocalarPanelEnPrincipal(JPanel panel) {
         panel.setSize(845, 465);
         panel.setLocation(0, 0);
-
+        
         contenido.removeAll();
         contenido.add(panel, BorderLayout.CENTER);
         contenido.revalidate();
         contenido.repaint();
         panel.setBackground(Color.WHITE);
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -406,7 +407,7 @@ public class frmHola extends javax.swing.JFrame {
     }//GEN-LAST:event_ReportesBtnMouseExited
 
     private void btnGraficosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGraficosMouseClicked
-        // TODO add your handling code here:
+        frmHola.colocalarPanelEnPrincipal(new TablasPequeñas());
     }//GEN-LAST:event_btnGraficosMouseClicked
 
     private void btnGraficosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGraficosMouseEntered
