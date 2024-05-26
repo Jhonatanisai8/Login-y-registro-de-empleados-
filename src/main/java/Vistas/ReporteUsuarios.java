@@ -1,5 +1,6 @@
 package Vistas;
 
+import DaoImplementacion.EmpleadoDaoImple;
 import Formularios.frmHola;
 import Models.Utelerias;
 import java.awt.Color;
@@ -103,6 +104,9 @@ public class ReporteUsuarios extends javax.swing.JPanel {
         btnModificar.setText("Modificar");
         btnModificar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnModificar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnModificarMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnModificarMouseEntered(evt);
             }
@@ -301,6 +305,20 @@ public class ReporteUsuarios extends javax.swing.JPanel {
         trsFiltro = new TableRowSorter(btlDatos.getModel());
         btlDatos.setRowSorter(trsFiltro);
     }//GEN-LAST:event_txtBuscarKeyTyped
+
+    private void btnModificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnModificarMouseClicked
+        int fila;
+        int idEmpleado;
+        //metodo para selecionar la fila
+        fila = btlDatos.getSelectedRow();
+        if (fila < 0) {
+            JOptionPane.showMessageDialog(null, "Por favor seleciona el empleado a modificar", "ATENCIÓN", JOptionPane.WARNING_MESSAGE);
+        } else {
+            EmpleadoDaoImple empleadoDaoImple = new EmpleadoDaoImple();
+            idEmpleado = (int) btlDatos.getValueAt(fila, 0);
+            frmHola.colocalarPanelEnPrincipal(new RegistroUsuario(empleadoDaoImple.obtenerInformacion(idEmpleado)));
+        }
+    }//GEN-LAST:event_btnModificarMouseClicked
 
     public void filtroNombre() {
         if (txtBuscar == null) {
