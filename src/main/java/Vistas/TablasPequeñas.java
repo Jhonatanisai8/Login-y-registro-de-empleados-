@@ -7,6 +7,8 @@ from empleados
 inner join area 
 on area.id = empleados.idArea
 GROUP by (area.nombre);
+358 
+200
  */
 package Vistas;
 
@@ -28,25 +30,29 @@ import org.jfree.data.general.DefaultPieDataset;
  */
 public class TablasPequeñas extends javax.swing.JPanel {
 
-    //variables para los graficos
-    JFreeChart grafico;
-    DefaultCategoryDataset datos = new DefaultCategoryDataset();
-
     Utelerias utelerias = new Utelerias();
     String[] cabezera = {"Nº Empleadps", "Cantidad"};
     DefaultTableModel modelo = new DefaultTableModel(cabezera, 0);
     String[] cabezera2 = {"Nº Empleadps", "Sexo"};
-    DefaultTableModel modelo2 = new DefaultTableModel(cabezera, 0);
+    DefaultTableModel modelo2 = new DefaultTableModel(cabezera2, 0);
+    String[] cabezera3 = {"Monto Total", "Área"};
+    DefaultTableModel modelo3 = new DefaultTableModel(cabezera3, 0);
 
     public TablasPequeñas() {
         initComponents();
         utelerias.cargarTable(modelo, tblDatos, 2);
         utelerias.cargarTable(modelo2, btlDatos2, 3);
+        utelerias.cargarTable(modelo3, tblBonos, 4);
         graficarDatos();
+        graficarBonos();
         graficoSexo();
     }
 
     private void graficarDatos() {
+        //variables para los graficos
+        JFreeChart grafico;
+        DefaultCategoryDataset datos = new DefaultCategoryDataset();
+        ChartPanel panel;
         try {
             //recorremos cada fila
             for (int i = 0; i < tblDatos.getRowCount(); i++) {
@@ -58,7 +64,7 @@ public class TablasPequeñas extends javax.swing.JPanel {
                     "Área", "Cantidad", datos, PlotOrientation.VERTICAL,
                     true, true,
                     false);
-            ChartPanel panel = new ChartPanel(grafico);
+            panel = new ChartPanel(grafico);
             //contenido.add(panel);
             //panel.setBounds(300, 40, 400, 200);
             panel.setMouseWheelEnabled(true);
@@ -73,7 +79,33 @@ public class TablasPequeñas extends javax.swing.JPanel {
         }
     }
 
-    public void graficoSexo() {
+    private void graficarBonos() {
+        try {
+            //variables para los graficos
+            JFreeChart graficoBonos;
+            //variables para el grafico
+            DefaultPieDataset datosBonos;
+            datosBonos = new DefaultKeyedValuesDataset();
+
+            for (int i = 0; i < tblBonos.getRowCount(); i++) {
+                datosBonos.setValue(tblBonos.getValueAt(i, 1).toString(), Double.parseDouble(tblBonos.getValueAt(i, 0).toString()));
+            }
+
+            graficoBonos = ChartFactory.createPieChart("Monto total en Bonos por Área", datosBonos, true, true, false);
+
+            //creamos un panel
+            ChartPanel panelBonos = new ChartPanel(graficoBonos);
+            panelBonos.setMouseWheelEnabled(true);
+            panelBonos.setPreferredSize(new Dimension(370, 400));
+
+            contenido3.setLayout(new BorderLayout());
+            contenido3.add(panelBonos, BorderLayout.NORTH);
+        } catch (NumberFormatException e) {
+            System.out.println("Error al graficar la tabla Bonos: " + e.toString());
+        }
+    }
+
+    private void graficoSexo() {
         try {
             //variables para los graficos
             JFreeChart grafico;
@@ -84,7 +116,7 @@ public class TablasPequeñas extends javax.swing.JPanel {
             for (int i = 0; i < btlDatos2.getRowCount(); i++) {
                 datos.setValue(btlDatos2.getValueAt(i, 1).toString(), Integer.parseInt(btlDatos2.getValueAt(i, 0).toString()));
             }
-            
+
             grafico = ChartFactory.createPieChart("Cantidad de empleados segun su sexo", datos, true, true, false);
 
             //creamos un panel
@@ -114,6 +146,9 @@ public class TablasPequeñas extends javax.swing.JPanel {
         contenido2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         btlDatos2 = new javax.swing.JTable();
+        contenido3 = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tblBonos = new javax.swing.JTable();
 
         tblDatos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -169,6 +204,33 @@ public class TablasPequeñas extends javax.swing.JPanel {
                 .addContainerGap(108, Short.MAX_VALUE))
         );
 
+        tblBonos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Monto Bono", "Área"
+            }
+        ));
+        jScrollPane3.setViewportView(tblBonos);
+
+        javax.swing.GroupLayout contenido3Layout = new javax.swing.GroupLayout(contenido3);
+        contenido3.setLayout(contenido3Layout);
+        contenido3Layout.setHorizontalGroup(
+            contenido3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(contenido3Layout.createSequentialGroup()
+                .addGap(49, 49, 49)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(75, Short.MAX_VALUE))
+        );
+        contenido3Layout.setVerticalGroup(
+            contenido3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(contenido3Layout.createSequentialGroup()
+                .addGap(31, 31, 31)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -178,15 +240,20 @@ public class TablasPequeñas extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(contenido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(contenido2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(393, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(contenido3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(contenido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(contenido2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(contenido3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(contenido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(contenido2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(14, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -196,8 +263,11 @@ public class TablasPequeñas extends javax.swing.JPanel {
     private javax.swing.JTable btlDatos2;
     private javax.swing.JPanel contenido;
     private javax.swing.JPanel contenido2;
+    private javax.swing.JPanel contenido3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JTable tblBonos;
     private javax.swing.JTable tblDatos;
     // End of variables declaration//GEN-END:variables
 }
