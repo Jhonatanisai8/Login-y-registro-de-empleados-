@@ -12,7 +12,5 @@ public class LoginRegistro {
     public static void main(String[] args) {
         frmInicio o = new frmInicio();
         o.setVisible(true);
-//        frmHola o = new frmHola();
-//        o.setVisible(true);
     }
 }

@@ -337,6 +337,7 @@ public class ReporteUsuarios extends javax.swing.JPanel {
             //llamamos al constructor que nos permite eliminar un empleado
             Empleado empleado = new Empleado(idEmpleado);
             empleadoDaoImple.eliminarEmpleado(empleado);
+            modelo.removeRow(fila);
             JOptionPane.showMessageDialog(null, "Cliente con id: " + idEmpleado + " Eliminado", "ATENCIÓN", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_btnEliminarMouseClicked
