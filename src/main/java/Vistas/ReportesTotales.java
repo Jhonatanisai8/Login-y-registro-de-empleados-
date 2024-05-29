@@ -111,7 +111,7 @@ public class ReportesTotales extends javax.swing.JPanel {
             PdfWriter.getInstance(documento, new FileOutputStream(ruta + "/Desktop/ReporteEmpleados.pdf"));
             documento.open();
 
-            PdfPTable tabla = new PdfPTable(10);
+            PdfPTable tabla = new PdfPTable(8);
 
             tabla.addCell("Id");
             tabla.addCell("Nombre");
@@ -119,14 +119,12 @@ public class ReportesTotales extends javax.swing.JPanel {
             tabla.addCell("App Materno");
             tabla.addCell("Área");
             tabla.addCell("Estado Civil");
-            tabla.addCell("Nº de hijos");
-            tabla.addCell("Bono Área");
             tabla.addCell("Desct");
             tabla.addCell("Sueldo Total");
 
             try {
                 Connection conectar = conexion.conectarBD();
-                String sql = "SELECT empleados.id AS \"ID\", empleados.nombre AS \"NOMBRE\", empleados.appPaterno AS \"APP PATERNO\", empleados.appMaterno AS \"APP MATERNO\", area.nombre AS \"ÁREA\", empleados.estadoCivil AS \"ESTADO CIVIL\", empleados.numHijos AS \"Nº DE HIJOS\", TRUNCATE(empleados.bonoArea,2) AS \"BONO ÁREA\", TRUNCATE((empleados.montoDescuento + empleados.montoImpuesto),2) AS \"SUM. DESC\", TRUNCATE(empleados.sueldoTotal,2) AS \"SUELDO TOTAL\" FROM empleados INNER JOIN area ON area.id = empleados.idArea";
+                String sql = "SELECT empleados.id, empleados.nombre , empleados.appPaterno, empleados.appMaterno, area.nombre , empleados.estadoCivil, TRUNCATE((empleados.montoDescuento + empleados.montoImpuesto),2) , TRUNCATE(empleados.sueldoTotal,2) FROM empleados INNER JOIN area ON area.id = empleados.idArea";
                 PreparedStatement consultaPreparada = conectar.prepareStatement(sql);
                 ResultSet resultado = consultaPreparada.executeQuery();
 
@@ -135,15 +133,12 @@ public class ReportesTotales extends javax.swing.JPanel {
                     do {
                         tabla.addCell(resultado.getString(1));
                         tabla.addCell(resultado.getString(2));
-                        tabla.addCell(resultado.getString(2));
                         tabla.addCell(resultado.getString(3));
                         tabla.addCell(resultado.getString(4));
                         tabla.addCell(resultado.getString(5));
                         tabla.addCell(resultado.getString(6));
                         tabla.addCell(resultado.getString(7));
                         tabla.addCell(resultado.getString(8));
-                        tabla.addCell(resultado.getString(9));
-                        tabla.addCell(resultado.getString(10));
                     } while (resultado.next());
                     documento.add(tabla);
                 }
