@@ -11,6 +11,7 @@ import java.awt.Color;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -18,31 +19,31 @@ import javax.swing.JPanel;
  * @author Jhonatan
  */
 public class frmHola extends javax.swing.JFrame {
-
+    
     public frmHola() {
         initComponents();
         obtenerFecha();
         FlatMaterialLighterIJTheme.setup();
         frmHola.colocalarPanelEnPrincipal(new Bienvenida());
     }
-
+    
     private void obtenerFecha() {
         LocalDate fecha = LocalDate.now();
         Locale spanishLocalDate = new Locale("es", "Es");
         lblFecha.setText(fecha.format(DateTimeFormatter.ofPattern("'Hoy es' EEEE dd 'de' MMMM 'de' yyyy", spanishLocalDate)));
     }
-
+    
     public static void colocalarPanelEnPrincipal(JPanel panel) {
         panel.setSize(845, 465);
         panel.setLocation(0, 0);
-
+        
         contenido.removeAll();
         contenido.add(panel, BorderLayout.CENTER);
         contenido.revalidate();
         contenido.repaint();
         panel.setBackground(Color.WHITE);
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -471,7 +472,12 @@ public class frmHola extends javax.swing.JFrame {
     }//GEN-LAST:event_GraficosBtnMouseExited
 
     private void btnSalirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalirMouseClicked
-        // TODO add your handling code here:
+        
+        int opcion;
+        opcion = JOptionPane.showConfirmDialog(null, "¿Desea Salir del sistema?", "ATENCIÓN", JOptionPane.WARNING_MESSAGE);
+        if (opcion == 0) {
+            System.exit(0);
+        }
     }//GEN-LAST:event_btnSalirMouseClicked
 
     private void btnSalirMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalirMouseEntered
