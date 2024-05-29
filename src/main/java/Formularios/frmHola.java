@@ -18,31 +18,31 @@ import javax.swing.JPanel;
  * @author Jhonatan
  */
 public class frmHola extends javax.swing.JFrame {
-    
+
     public frmHola() {
         initComponents();
         obtenerFecha();
         FlatMaterialLighterIJTheme.setup();
         frmHola.colocalarPanelEnPrincipal(new Bienvenida());
     }
-    
+
     private void obtenerFecha() {
         LocalDate fecha = LocalDate.now();
         Locale spanishLocalDate = new Locale("es", "Es");
         lblFecha.setText(fecha.format(DateTimeFormatter.ofPattern("'Hoy es' EEEE dd 'de' MMMM 'de' yyyy", spanishLocalDate)));
     }
-    
+
     public static void colocalarPanelEnPrincipal(JPanel panel) {
         panel.setSize(845, 465);
         panel.setLocation(0, 0);
-        
+
         contenido.removeAll();
         contenido.add(panel, BorderLayout.CENTER);
         contenido.revalidate();
         contenido.repaint();
         panel.setBackground(Color.WHITE);
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -58,6 +58,8 @@ public class frmHola extends javax.swing.JFrame {
         btnReportes = new javax.swing.JLabel();
         GraficosBtn = new javax.swing.JPanel();
         btnGraficos = new javax.swing.JLabel();
+        SalirBtn = new javax.swing.JPanel();
+        btnSalir = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         Header = new javax.swing.JPanel();
         lblFecha = new javax.swing.JLabel();
@@ -224,6 +226,45 @@ public class frmHola extends javax.swing.JFrame {
             .addComponent(btnGraficos, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE)
         );
 
+        SalirBtn.setBackground(new java.awt.Color(1, 100, 148));
+        SalirBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                SalirBtnMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                SalirBtnMouseExited(evt);
+            }
+        });
+
+        btnSalir.setFont(new java.awt.Font("Segoe UI Semilight", 0, 24)); // NOI18N
+        btnSalir.setForeground(new java.awt.Color(255, 255, 255));
+        btnSalir.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/GRAFICOS.png"))); // NOI18N
+        btnSalir.setText("Salir");
+        btnSalir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnSalir.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnSalirMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnSalirMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnSalirMouseExited(evt);
+            }
+        });
+
+        javax.swing.GroupLayout SalirBtnLayout = new javax.swing.GroupLayout(SalirBtn);
+        SalirBtn.setLayout(SalirBtnLayout);
+        SalirBtnLayout.setHorizontalGroup(
+            SalirBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(btnSalir, javax.swing.GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE)
+        );
+        SalirBtnLayout.setVerticalGroup(
+            SalirBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(btnSalir, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -238,7 +279,8 @@ public class frmHola extends javax.swing.JFrame {
                     .addComponent(PrincipalBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(RegistroEmpleadosBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(ReportesBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(GraficosBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(GraficosBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(SalirBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(47, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -254,7 +296,9 @@ public class frmHola extends javax.swing.JFrame {
                 .addComponent(ReportesBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(GraficosBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(168, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(SalirBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(96, Short.MAX_VALUE))
         );
 
         jLabel2.setBackground(new java.awt.Color(153, 153, 153));
@@ -425,6 +469,26 @@ public class frmHola extends javax.swing.JFrame {
     private void GraficosBtnMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_GraficosBtnMouseExited
         // TODO add your handling code here:
     }//GEN-LAST:event_GraficosBtnMouseExited
+
+    private void btnSalirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalirMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnSalirMouseClicked
+
+    private void btnSalirMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalirMouseEntered
+        SalirBtn.setBackground(new Color(1, 84, 124));
+    }//GEN-LAST:event_btnSalirMouseEntered
+
+    private void btnSalirMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalirMouseExited
+        SalirBtn.setBackground(new Color(1, 100, 148));
+    }//GEN-LAST:event_btnSalirMouseExited
+
+    private void SalirBtnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SalirBtnMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_SalirBtnMouseEntered
+
+    private void SalirBtnMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SalirBtnMouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_SalirBtnMouseExited
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -463,10 +527,12 @@ public class frmHola extends javax.swing.JFrame {
     private javax.swing.JPanel PrincipalBtn;
     private javax.swing.JPanel RegistroEmpleadosBtn;
     private javax.swing.JPanel ReportesBtn;
+    private javax.swing.JPanel SalirBtn;
     private javax.swing.JLabel btnGraficos;
     private javax.swing.JLabel btnPrincipal;
     private javax.swing.JLabel btnRegistro;
     private javax.swing.JLabel btnReportes;
+    private javax.swing.JLabel btnSalir;
     private static javax.swing.JPanel contenido;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
