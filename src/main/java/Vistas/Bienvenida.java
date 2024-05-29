@@ -39,7 +39,7 @@ public class Bienvenida extends javax.swing.JPanel {
         jLabel1.setText("Bienvenido.");
 
         jLabel2.setFont(new java.awt.Font("SimHei", 0, 15)); // NOI18N
-        jLabel2.setText("Sistema de Crud de empleados ");
+        jLabel2.setText("Sistema de registro de empleados ");
 
         jLabel3.setFont(new java.awt.Font("SimHei", 0, 15)); // NOI18N
         jLabel3.setText("Forma optima y facil de flujo de datos de empleados de esta empresa.");

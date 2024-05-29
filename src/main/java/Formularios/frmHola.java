@@ -268,7 +268,7 @@ public class frmHola extends javax.swing.JFrame {
 
         jLabel4.setFont(new java.awt.Font("MS Gothic", 1, 20)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("SISTEMA CRUD EMPLEADOS");
+        jLabel4.setText("SISTEMA REGISTROS DE EMPLEADOS");
 
         javax.swing.GroupLayout HeaderLayout = new javax.swing.GroupLayout(Header);
         Header.setLayout(HeaderLayout);
