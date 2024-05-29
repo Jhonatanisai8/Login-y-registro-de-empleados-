@@ -240,7 +240,7 @@ public class frmHola extends javax.swing.JFrame {
         btnSalir.setFont(new java.awt.Font("Segoe UI Semilight", 0, 24)); // NOI18N
         btnSalir.setForeground(new java.awt.Color(255, 255, 255));
         btnSalir.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/GRAFICOS.png"))); // NOI18N
+        btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/SALIR (3).png"))); // NOI18N
         btnSalir.setText("Salir");
         btnSalir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnSalir.addMouseListener(new java.awt.event.MouseAdapter() {
