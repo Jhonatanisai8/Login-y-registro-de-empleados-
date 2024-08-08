@@ -1,6 +1,5 @@
 package Principal;
 
-import Formularios.frmHola;
 import Formularios.frmInicio;
 
 /**
